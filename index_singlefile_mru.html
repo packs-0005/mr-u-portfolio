@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr.U – Portfolio</title>
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .category-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .artwork-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .artwork-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal-overlay {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .category-filter.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+<style>
+:root{--brand-gold:#D4AF37}
+.text-gold{color:var(--brand-gold)!important}
+.hover\:text-gold:hover{color:var(--brand-gold)!important}
+.bg-gold{background-color:var(--brand-gold)!important;color:#111!important}
+.category-badge{background:rgba(212,175,55,.10);color:var(--brand-gold);border:1px solid rgba(212,175,55,.35)}
+.tool-badge{background:rgba(212,175,55,.12);color:var(--brand-gold);border:1px solid rgba(212,175,55,.35)}
+</style>
+
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-cube mr-2 text-gold"></i>
+                    Mr.U – Portfolio
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">ホーム</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">プロフィール</a>
+                    <a href="#portfolio" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">作品集</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">お問い合わせ</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-toggle" class="text-gray-700 hover:text-gold focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden mt-4 pb-4 hidden">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">ホーム</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">プロフィール</a>
+                <a href="#portfolio" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">作品集</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">お問い合わせ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="animate-fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">  <span class="block">Mr.U</span>  <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">    Portfolio  </span></h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。<br><span class="text-base opacity-90">主な使用ソフト：Blender / ZBrush / Rhinoceros / After Effects / Premiere Pro / FL Studio / Photoshop / Illustrator / Substance 3D Painter / Cascadeur</span></p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#portfolio" class="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
+                        <i class="fas fa-images mr-2"></i>作品を見る
+                    </a>
+                    <a href="#about" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all transform hover:scale-105">
+                        <i class="fas fa-user mr-2"></i>プロフィール
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 text-6xl opacity-10 animate-pulse">
+            <i class="fas fa-cube"></i>
+        </div>
+        <div class="absolute bottom-20 right-10 text-4xl opacity-10 animate-pulse" style="animation-delay: 0.5s;">
+            <i class="fas fa-gem"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+                    <i class="fas fa-user-circle mr-4 text-gold"></i>プロフィール
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    創造性と技術を融合させ、独創的な作品を生み出すクリエイター
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="bg-gradient-to-br from-purple-100 to-blue-100 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">専門分野</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-video text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">3DCGアニメーション</h4>
+                                    <p class="text-gray-600 text-sm">映像制作・キャラクターアニメーション</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-chess-knight text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">フィギュア制作</h4>
+                                    <p class="text-gray-600 text-sm">オリジナルフィギュア・スカルプティング</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-gem text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">ジュエリーデザイン</h4>
+                                    <p class="text-gray-600 text-sm">アクセサリー・宝石デザイン</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="space-y-6">
+                        <div class="bg-gray-50 p-6 rounded-xl">
+                            <h4 class="font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>クリエイティブビジョン
+                            </h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                技術と芸術性を融合させ、見る人の心に響く作品作りを目指しています。
+                                細部へのこだわりと革新的なアプローチを大切にしています。
+                            </p>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-xl">
+                            <h4 class="font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-tools text-blue-500 mr-2"></i>使用ツール
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Blender</span>
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Maya</span>
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">ZBrush</span>
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Substance Painter</span>
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Rhinoceros</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
+                    <i class="fas fa-images mr-4 text-gold"></i>作品集
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    多様なジャンルの創作活動から生まれた作品をご覧ください
+                </p>
+                
+                <!-- Category Filter -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <button class="category-filter active px-6 py-3 rounded-full font-semibold transition-all duration-300" data-category="all">
+                        <i class="fas fa-th mr-2"></i>すべて
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-gray-100 transition-all duration-300" data-category="animation">
+                        <i class="fas fa-video mr-2"></i>3DCGアニメーション
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-gray-100 transition-all duration-300" data-category="figure">
+                        <i class="fas fa-chess-knight mr-2"></i>フィギュア
+                    </button>
+                    <button class="category-filter px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-gray-100 transition-all duration-300" data-category="jewelry">
+                        <i class="fas fa-gem mr-2"></i>ジュエリー
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="text-center py-16">
+                <div class="loading-spinner mx-auto mb-4"></div>
+                <p class="text-gray-600">作品を読み込み中...</p>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+                <!-- Portfolio items will be dynamically loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="text-center py-16 hidden">
+                <i class="fas fa-folder-open text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">作品がありません</h3>
+                <p class="text-gray-500">選択したカテゴリーに作品がまだ登録されていません。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Overview -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800">制作カテゴリー</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    それぞれの分野で独自のスタイルと技法を追求しています
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 3DCG Animation -->
+                <div class="category-card bg-gradient-to-br from-purple-500 to-blue-600 p-8 rounded-2xl text-white text-center">
+                    <div class="text-6xl mb-6">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">3DCGアニメーション</h3>
+                    <p class="text-purple-100 mb-6 leading-relaxed">
+                        キャラクターアニメーションから映像制作まで、
+                        動きのある表現で物語を紡ぎます。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">キャラクター</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">モーション</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">VFX</span>
+                    </div>
+                </div>
+                
+                <!-- Figure -->
+                <div class="category-card bg-gradient-to-br from-blue-500 to-teal-600 p-8 rounded-2xl text-white text-center">
+                    <div class="text-6xl mb-6">
+                        <i class="fas fa-chess-knight"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">フィギュア制作</h3>
+                    <p class="text-blue-100 mb-6 leading-relaxed">
+                        オリジナルキャラクターから既存作品まで、
+                        立体造形の魅力を追求します。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">スカルプト</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">ペイント</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">ディテール</span>
+                    </div>
+                </div>
+                
+                <!-- Jewelry -->
+                <div class="category-card bg-gradient-to-br from-yellow-500 to-orange-600 p-8 rounded-2xl text-white text-center">
+                    <div class="text-6xl mb-6">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">ジュエリーデザイン</h3>
+                    <p class="text-yellow-100 mb-6 leading-relaxed">
+                        美しいフォルムと機能性を兼ね備えた
+                        アクセサリーをデザインします。
+                    </p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">リング</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">ネックレス</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">カスタム</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                <i class="fas fa-envelope mr-4 text-gold"></i>お問い合わせ
+            </h2>
+            <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                作品に関するご質問や制作依頼など、お気軽にお声かけください
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-800 p-6 rounded-xl">
+                    <i class="fas fa-envelope text-3xl text-gold mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">メール</h3>
+                    <p class="text-gray-300">contact@portfolio.com</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl">
+                    <i class="fas fa-phone text-3xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">電話</h3>
+                    <p class="text-gray-300">090-1234-5678</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl">
+                    <i class="fas fa-map-marker-alt text-3xl text-green-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">所在地</h3>
+                    <p class="text-gray-300">東京都</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-center space-x-6">
+    <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:text-gold transition-colors" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:text-gold transition-colors" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+</div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 text-center text-gray-400">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Mr.U – Portfolio. All rights reserved.</p>
+            <p class="mt-2 text-sm">Made with ❤️ for creative expression</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Artwork Details -->
+    <div id="artwork-modal" class="fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4 hidden">
+        <div class="modal-content bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="modal-title" class="text-2xl font-bold text-gray-800"></h3>
+                    <button id="modal-close" class="text-gray-400 hover:text-gray-600 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div id="modal-content">
+                    <!-- Modal content will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    
+<!-- Inlined main.js -->
+<script>
+// Portfolio Website JavaScript
+class PortfolioApp {
+    constructor() {
+        this.currentCategory = 'all';
+        this.artworks = [];
+        this.modal = null;
+        this.init();
+    }
+
+    async init() {
+        this.setupEventListeners();
+        this.setupSmoothScrolling();
+        this.setupNavbar();
+        await this.loadArtworks();
+        this.hideLoading();
+    }
+
+    setupEventListeners() {
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuToggle?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuToggle.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.className = 'fas fa-bars text-xl';
+            } else {
+                icon.className = 'fas fa-times text-xl';
+            }
+        });
+
+        // Category filter buttons
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('click', (e) => {
+                const category = e.currentTarget.dataset.category;
+                this.filterArtworks(category);
+                this.updateActiveFilter(e.currentTarget);
+            });
+        });
+
+        // Modal functionality
+        this.setupModal();
+
+        // Close mobile menu when clicking on navigation links
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu?.classList.add('hidden');
+                const icon = mobileMenuToggle?.querySelector('i');
+                if (icon) {
+                    icon.className = 'fas fa-bars text-xl';
+                }
+            });
+        });
+    }
+
+    setupSmoothScrolling() {
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const navbarHeight = document.getElementById('navbar').offsetHeight;
+                    const targetPosition = targetSection.offsetTop - navbarHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+
+    setupNavbar() {
+        const navbar = document.getElementById('navbar');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 100) {
+                navbar.classList.add('bg-white/95');
+                navbar.classList.remove('bg-white/90');
+            } else {
+                navbar.classList.remove('bg-white/95');
+                navbar.classList.add('bg-white/90');
+            }
+
+            lastScrollY = currentScrollY;
+        });
+    }
+
+    setupModal() {
+        const modal = document.getElementById('artwork-modal');
+        const closeBtn = document.getElementById('modal-close');
+        
+        closeBtn?.addEventListener('click', () => {
+            this.closeModal();
+        });
+
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.closeModal();
+            }
+        });
+
+        // ESC key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+                this.closeModal();
+            }
+        });
+    }
+
+    async loadArtworks() {
+        try {
+            // Try to fetch from API, if fails use sample data
+            const response = await fetch('tables/artworks');
+            if (response.ok) {
+                const data = await response.json();
+                this.artworks = data.data || [];
+            } else {
+                this.artworks = this.getSampleArtworks();
+            }
+        } catch (error) {
+            console.log('Using sample data');
+            this.artworks = this.getSampleArtworks();
+        }
+        
+        this.renderArtworks();
+    }
+
+    getSampleArtworks() {
+        return [
+            {
+                id: 1,
+                title: "サイバーパンクキャラクター",
+                category: "animation",
+                description: "未来都市を駆け抜けるサイバネティックキャラクターのアニメーション作品。リアルタイムレンダリングと高度なシェーディング技術を使用。",
+                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
+                tags: ["Blender", "アニメーション", "キャラクター", "サイバーパンク"],
+                year: 2024,
+                duration: "3分30秒",
+                software: "Blender, Substance Painter",
+                video_url: "https://example.com/video1.mp4"
+            },
+            {
+                id: 2,
+                title: "ドラゴンフィギュア",
+                category: "figure",
+                description: "神話の世界から飛び出したような迫力あるドラゴンフィギュア。細部まで丁寧にスカルプトし、リアルな質感を追求しました。",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+                tags: ["ZBrush", "スカルプト", "ファンタジー", "ドラゴン"],
+                year: 2024,
+                size: "高さ25cm",
+                material: "PLA樹脂",
+                techniques: "3Dプリント, 手塗り仕上げ"
+            },
+            {
+                id: 3,
+                title: "エレガントリング",
+                category: "jewelry",
+                description: "シンプルながらも上品な輝きを放つプラチナリング。幾何学的なデザインが特徴的な現代的なジュエリー。",
+                image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=600&fit=crop",
+                tags: ["Rhinoceros", "ジュエリー", "プラチナ", "モダン"],
+                year: 2024,
+                material: "プラチナ950",
+                size: "リングサイズ10-20対応",
+                weight: "約5g"
+            },
+            {
+                id: 4,
+                title: "森の精霊アニメーション",
+                category: "animation",
+                description: "幻想的な森の中で踊る精霊たちのショートアニメーション。自然の美しさとマジカルな世界観を表現。",
+                image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
+                tags: ["Maya", "エフェクト", "ファンタジー", "自然"],
+                year: 2023,
+                duration: "2分15秒",
+                software: "Maya, After Effects",
+                video_url: "https://example.com/video2.mp4"
+            },
+            {
+                id: 5,
+                title: "戦士フィギュア",
+                category: "figure",
+                description: "中世の騎士をイメージした戦士フィギュア。武器や防具の細部まで丁寧に造形し、迫力ある立ち姿を再現。",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
+                tags: ["ZBrush", "キャラクター", "中世", "戦士"],
+                year: 2023,
+                size: "高さ30cm",
+                material: "レジン",
+                techniques: "3Dプリント, アクリル塗装"
+            },
+            {
+                id: 6,
+                title: "スタンダードネックレス",
+                category: "jewelry",
+                description: "日常使いからフォーマルまで幅広く対応できるシンプルなデザインのネックレス。上質な素材を使用。",
+                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&h=600&fit=crop",
+                tags: ["デザイン", "ネックレス", "シルバー", "シンプル"],
+                year: 2023,
+                material: "シルバー925",
+                length: "40-45cm調整可能",
+                weight: "約8g"
+            }
+        ];
+    }
+
+    renderArtworks() {
+        const grid = document.getElementById('portfolio-grid');
+        const emptyState = document.getElementById('empty-state');
+        
+        if (!grid) return;
+
+        const filteredArtworks = this.currentCategory === 'all' 
+            ? this.artworks 
+            : this.artworks.filter(artwork => artwork.category === this.currentCategory);
+
+        if (filteredArtworks.length === 0) {
+            grid.classList.add('hidden');
+            emptyState?.classList.remove('hidden');
+            return;
+        }
+
+        emptyState?.classList.add('hidden');
+        grid.classList.remove('hidden');
+
+        grid.innerHTML = filteredArtworks.map(artwork => `
+            <div class="artwork-item bg-white rounded-2xl shadow-lg overflow-hidden group" data-id="${artwork.id}">
+                <div class="aspect-video bg-gray-200 overflow-hidden relative">
+                    <img src="${artwork.image}" 
+                         alt="${artwork.title}" 
+                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="category-badge ${this.getCategoryBadgeClass(artwork.category)} px-3 py-1 rounded-full text-sm font-medium">
+                            ${this.getCategoryIcon(artwork.category)} ${this.getCategoryName(artwork.category)}
+                        </span>
+                        <span class="text-gray-500 text-sm">${artwork.year}</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
+                        ${artwork.title}
+                    </h3>
+                    
+                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                        ${artwork.description}
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${artwork.tags.slice(0, 3).map(tag => `
+                            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                ${tag}
+                            </span>
+                        `).join('')}
+                        ${artwork.tags.length > 3 ? `
+                            <span class="text-gray-500 text-xs self-center">
+                                +${artwork.tags.length - 3}個
+                            </span>
+                        ` : ''}
+                    </div>
+                    
+                    <button class="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-purple-600 transition-colors font-medium">
+                        <i class="fas fa-eye mr-2"></i>詳細を見る
+                    </button>
+                </div>
+            </div>
+        `).join('');
+
+        // Add click event listeners to artwork items
+        const artworkItems = grid.querySelectorAll('.artwork-item');
+        artworkItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const artworkId = parseInt(item.dataset.id);
+                this.openModal(artworkId);
+            });
+        });
+    }
+
+    getCategoryBadgeClass(category) {
+        const classes = {
+            animation: 'bg-purple-100 text-purple-800',
+            figure: 'bg-blue-100 text-blue-800', 
+            jewelry: 'bg-yellow-100 text-yellow-800'
+        };
+        return classes[category] || 'bg-gray-100 text-gray-800';
+    }
+
+    getCategoryIcon(category) {
+        const icons = {
+            animation: '<i class="fas fa-video mr-1"></i>',
+            figure: '<i class="fas fa-chess-knight mr-1"></i>',
+            jewelry: '<i class="fas fa-gem mr-1"></i>'
+        };
+        return icons[category] || '<i class="fas fa-image mr-1"></i>';
+    }
+
+    getCategoryName(category) {
+        const names = {
+            animation: '3DCGアニメーション',
+            figure: 'フィギュア',
+            jewelry: 'ジュエリー'
+        };
+        return names[category] || 'その他';
+    }
+
+    filterArtworks(category) {
+        this.currentCategory = category;
+        this.renderArtworks();
+    }
+
+    updateActiveFilter(activeButton) {
+        // Remove active class from all filter buttons
+        document.querySelectorAll('.category-filter').forEach(btn => {
+            btn.classList.remove('active');
+            btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+        });
+
+        // Add active class to clicked button
+        activeButton.classList.add('active');
+        activeButton.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100');
+    }
+
+    openModal(artworkId) {
+        const artwork = this.artworks.find(a => a.id === artworkId);
+        if (!artwork) return;
+
+        const modal = document.getElementById('artwork-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+
+        if (!modal || !modalTitle || !modalContent) return;
+
+        modalTitle.textContent = artwork.title;
+        modalContent.innerHTML = this.generateModalContent(artwork);
+
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // Setup video if exists
+        if (artwork.video_url) {
+            this.setupVideoPlayer(artwork.video_url);
+        }
+    }
+
+    generateModalContent(artwork) {
+        return `
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <img src="${artwork.image}" 
+                         alt="${artwork.title}" 
+                         class="w-full rounded-lg shadow-lg">
+                    
+                    ${artwork.video_url ? `
+                        <div class="mt-4">
+                            <video controls class="w-full rounded-lg" poster="${artwork.image}">
+                                <source src="${artwork.video_url}" type="video/mp4">
+                                お使いのブラウザは動画再生をサポートしていません。
+                            </video>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="category-badge ${this.getCategoryBadgeClass(artwork.category)} px-4 py-2 rounded-full font-medium">
+                            ${this.getCategoryIcon(artwork.category)} ${this.getCategoryName(artwork.category)}
+                        </span>
+                        <span class="text-gray-500">${artwork.year}</span>
+                    </div>
+                    
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        ${artwork.description}
+                    </p>
+                    
+                    <div class="space-y-4">
+                        ${this.generateArtworkDetails(artwork)}
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="font-semibold text-gray-800 mb-3">タグ</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${artwork.tags.map(tag => `
+                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
+                                    ${tag}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    generateArtworkDetails(artwork) {
+        const details = [];
+
+        if (artwork.duration) {
+            details.push(`
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-gray-400 mr-3"></i>
+                    <div>
+                        <span class="text-sm text-gray-500">再生時間</span>
+                        <p class="font-medium text-gray-800">${artwork.duration}</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        if (artwork.software) {
+            details.push(`
+                <div class="flex items-center">
+                    <i class="fas fa-tools text-gray-400 mr-3"></i>
+                    <div>
+                        <span class="text-sm text-gray-500">使用ソフト</span>
+                        <p class="font-medium text-gray-800">${artwork.software}</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        if (artwork.size) {
+            details.push(`
+                <div class="flex items-center">
+                    <i class="fas fa-ruler text-gray-400 mr-3"></i>
+                    <div>
+                        <span class="text-sm text-gray-500">サイズ</span>
+                        <p class="font-medium text-gray-800">${artwork.size}</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        if (artwork.material) {
+            details.push(`
+                <div class="flex items-center">
+                    <i class="fas fa-cube text-gray-400 mr-3"></i>
+                    <div>
+                        <span class="text-sm text-gray-500">素材</span>
+                        <p class="font-medium text-gray-800">${artwork.material}</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        if (artwork.weight) {
+            details.push(`
+                <div class="flex items-center">
+                    <i class="fas fa-weight text-gray-400 mr-3"></i>
+                    <div>
+                        <span class="text-sm text-gray-500">重量</span>
+                        <p class="font-medium text-gray-800">${artwork.weight}</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        if (artwork.techniques) {
+            details.push(`
+                <div class="flex items-center">
+                    <i class="fas fa-magic text-gray-400 mr-3"></i>
+                    <div>
+                        <span class="text-sm text-gray-500">技法</span>
+                        <p class="font-medium text-gray-800">${artwork.techniques}</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        if (artwork.length) {
+            details.push(`
+                <div class="flex items-center">
+                    <i class="fas fa-link text-gray-400 mr-3"></i>
+                    <div>
+                        <span class="text-sm text-gray-500">長さ</span>
+                        <p class="font-medium text-gray-800">${artwork.length}</p>
+                    </div>
+                </div>
+            `);
+        }
+
+        return details.join('');
+    }
+
+    setupVideoPlayer(videoUrl) {
+        // Video player setup can be enhanced here
+        // For now, using basic HTML5 video controls
+    }
+
+    closeModal() {
+        const modal = document.getElementById('artwork-modal');
+        modal?.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    hideLoading() {
+        const loadingState = document.getElementById('loading-state');
+        loadingState?.classList.add('hidden');
+        
+        const portfolioGrid = document.getElementById('portfolio-grid');
+        portfolioGrid?.classList.remove('hidden');
+    }
+}
+
+// Initialize the portfolio app when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new PortfolioApp();
+});
+
+// Add CSS for line-clamp utility
+const style = document.createElement('style');
+style.textContent = `
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>
