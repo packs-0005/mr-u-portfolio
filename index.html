@@ -84,32 +84,19 @@
     </style>
 
 <style>
-:root{--bg:#0b0b0c;--fg:#f5f7fb;--muted:#9aa0a6;--gold:#D4AF37}
+:root{--bg:#0b0b0c;--fg:#f5f7fb;--gold:#D4AF37}
 html,body{background:var(--bg)!important;color:var(--fg)!important}
-a{color:var(--fg)}
-.text-gold{color:var(--gold)!important}
-.hover\:text-gold:hover{color:var(--gold)!important}
+.text-gold{color:var(--gold)!important}.hover\:text-gold:hover{color:var(--gold)!important}
 .bg-gold{background-color:var(--gold)!important;color:#111!important}
 .border-gold{border-color:var(--gold)!important}
-.section-dark{background:transparent!important}
-.card-dark{background:#141416!important;color:var(--fg)!important;border:1px solid rgba(212,175,55,.18)!important}
-.badge{background:rgba(212,175,55,.12);color:var(--gold);border:1px solid rgba(212,175,55,.3);padding:.25rem .6rem;border-radius:9999px;display:inline-block;font-size:.85rem}
-.nav-link{color:#d9dde3}
-.nav-link:hover{color:var(--gold)}
-.category-badge{background:rgba(212,175,55,.10)!important;color:var(--gold)!important;border:1px solid rgba(212,175,55,.35)!important}
+.badge{background:rgba(212,175,55,.12);color:var(--gold);border:1px solid rgba(212,175,55,.35);padding:.25rem .6rem;border-radius:9999px;display:inline-block;font-size:.85rem}
+/* neutralize light panels */
 .bg-white,.bg-gray-50,.bg-gray-100,.bg-gray-200{background:transparent!important}
-.text-gray-800{color:#e6e9ef!important}
-.text-gray-700{color:#d5d9e0!important}
-.text-gray-600{color:#b9c0c9!important}
-.text-gray-500{color:#a6adb7!important}
-.text-gray-300{color:#cfd5df!important}
+.text-gray-800{color:#e6e9ef!important}.text-gray-700{color:#d5d9e0!important}.text-gray-600{color:#b9c0c9!important}.text-gray-500{color:#a6adb7!important}.text-gray-300{color:#cfd5df!important}
 .border-gray-200{border-color:#2a2d31!important}
-hr{border-color:#2a2d31}
-.btn-primary{background:var(--gold);color:#111;border:none}
-.btn-primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
-.btn-ghost{border:1.5px solid var(--gold);color:var(--fg)}
-.btn-ghost:hover{background:rgba(212,175,55,.08)}
 .hero-gold{background-image:linear-gradient(90deg,#D4AF37 0%,#F2E7B3 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card-dark{background:#141416!important;color:var(--fg)!important;border:1px solid rgba(212,175,55,.18)!important}
+.category-badge{background:rgba(212,175,55,.10)!important;color:var(--gold)!important;border:1px solid rgba(212,175,55,.35)!important}
 </style>
 
 </head>
@@ -154,7 +141,7 @@ hr{border-color:#2a2d31}
         <div class="absolute inset-0 bg-black opacity-20"></div>
         <div class="container mx-auto px-6 text-center relative z-10">
             <div class="animate-fade-in">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight"><span class="block">Mr.U</span><span class="block hero-gold">Portfolio</span></h1>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">  <span class="block">Mr.U</span>  <span class="block text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F5E6A7]">Portfolio</span></h1>
                 <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。<br><span class="text-base opacity-90">主な使用ソフト：Blender / ZBrush / Rhinoceros / After Effects / Premiere Pro / FL Studio / Photoshop / Illustrator / Substance 3D Painter / Cascadeur</span></p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#portfolio" class="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
@@ -177,7 +164,7 @@ hr{border-color:#2a2d31}
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section-dark" class="py-20 bg-white">
+    <section id="about" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
@@ -248,7 +235,7 @@ hr{border-color:#2a2d31}
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="section-dark" class="py-20 bg-gray-50">
+    <section id="portfolio" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
@@ -361,7 +348,7 @@ hr{border-color:#2a2d31}
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section-dark" class="py-20 bg-gray-900 text-white">
+    <section id="contact" class="py-20 bg-gray-900 text-white">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6">
                 <i class="fas fa-envelope mr-4 text-gold"></i>お問い合わせ
