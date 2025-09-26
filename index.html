@@ -81,7 +81,58 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-    </style>
+    
+/* === Contrast Fix Pack v2 === */
+:root{--bg:#0b0b0c;--fg:#f6f8fb;--gold:#D4AF37}
+/* Navbar / header becomes dark glass */
+header, nav, .site-header {
+  background: rgba(11,11,12,0.86) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid #2a2d31;
+}
+/* Darken any light cards inside content sections */
+.section-dark [class*="bg-white"],
+.section-dark [class*="bg-gray-50"],
+.section-dark [class*="bg-gray-100"],
+.section-dark [class*="bg-gray-200"],
+.section-dark [class*="bg-white/"] {
+  background: #141416 !important;
+  color: var(--fg) !important;
+  border: 1px solid rgba(212,175,55,.16) !important;
+}
+/* Remove pastel gradients that were lowering contrast */
+.section-dark [class*="bg-gradient-to-"] {
+  background-image: none !important;
+}
+/* Ensure inner text has sufficient contrast */
+.section-dark .text-gray-800,
+.section-dark .text-gray-700,
+.section-dark .text-gray-600,
+.section-dark .text-gray-500,
+.section-dark p,
+.section-dark li {
+  color: #e9edf5 !important;
+}
+/* Icon tiles inside cards */
+.section-dark [class*="text-gray-600"] i,
+.section-dark [class*="text-gray-500"] i {
+  color: var(--gold) !important;
+}
+/* Buttons on dark backgrounds */
+.section-dark .btn,
+.section-dark a.inline-flex,
+.section-dark button {
+  border-color: var(--gold) !important;
+  color: var(--fg) !important;
+}
+/* Round panels (glass) */
+.section-dark .rounded-2xl,
+.section-dark .rounded-xl {
+  box-shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+</style>
 
 <style>
 :root{--bg:#0b0b0c;--fg:#f5f7fb;--gold:#D4AF37}
