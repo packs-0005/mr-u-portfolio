@@ -132,6 +132,29 @@ header, nav, .site-header {
   box-shadow: 0 8px 30px rgba(0,0,0,.35);
 }
 
+
+/* === Contrast Fix v3: About section hard overrides === */
+#about [class*="bg-white"],
+#about [class*="bg-gray-"],
+#about [class*="bg-gradient-to-"],
+#about [class*="from-"],
+#about [class*="to-"],
+#about [class*="backdrop-blur"]{
+  background:#141416 !important;
+  background-image:none !important;
+  color:var(--fg) !important;
+  border:1px solid rgba(212,175,55,.16) !important;
+}
+#about .text-gray-800,
+#about .text-gray-700,
+#about .text-gray-600,
+#about .text-gray-500,
+#about p,#about li,#about h3{
+  color:#e9edf5 !important;
+}
+#about [class*="opacity-"]{opacity:1 !important}
+#about i{color:var(--gold) !important}
+
 </style>
 
 <style>
