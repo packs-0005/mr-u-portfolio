@@ -84,12 +84,32 @@
     </style>
 
 <style>
-:root{--brand-gold:#D4AF37}
-.text-gold{color:var(--brand-gold)!important}
-.hover\:text-gold:hover{color:var(--brand-gold)!important}
-.bg-gold{background-color:var(--brand-gold)!important;color:#111!important}
-.category-badge{background:rgba(212,175,55,.10);color:var(--brand-gold);border:1px solid rgba(212,175,55,.35)}
-.tool-badge{background:rgba(212,175,55,.12);color:var(--brand-gold);border:1px solid rgba(212,175,55,.35)}
+:root{--bg:#0b0b0c;--fg:#f5f7fb;--muted:#9aa0a6;--gold:#D4AF37}
+html,body{background:var(--bg)!important;color:var(--fg)!important}
+a{color:var(--fg)}
+.text-gold{color:var(--gold)!important}
+.hover\:text-gold:hover{color:var(--gold)!important}
+.bg-gold{background-color:var(--gold)!important;color:#111!important}
+.border-gold{border-color:var(--gold)!important}
+.section-dark{background:transparent!important}
+.card-dark{background:#141416!important;color:var(--fg)!important;border:1px solid rgba(212,175,55,.18)!important}
+.badge{background:rgba(212,175,55,.12);color:var(--gold);border:1px solid rgba(212,175,55,.3);padding:.25rem .6rem;border-radius:9999px;display:inline-block;font-size:.85rem}
+.nav-link{color:#d9dde3}
+.nav-link:hover{color:var(--gold)}
+.category-badge{background:rgba(212,175,55,.10)!important;color:var(--gold)!important;border:1px solid rgba(212,175,55,.35)!important}
+.bg-white,.bg-gray-50,.bg-gray-100,.bg-gray-200{background:transparent!important}
+.text-gray-800{color:#e6e9ef!important}
+.text-gray-700{color:#d5d9e0!important}
+.text-gray-600{color:#b9c0c9!important}
+.text-gray-500{color:#a6adb7!important}
+.text-gray-300{color:#cfd5df!important}
+.border-gray-200{border-color:#2a2d31!important}
+hr{border-color:#2a2d31}
+.btn-primary{background:var(--gold);color:#111;border:none}
+.btn-primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn-ghost{border:1.5px solid var(--gold);color:var(--fg)}
+.btn-ghost:hover{background:rgba(212,175,55,.08)}
+.hero-gold{background-image:linear-gradient(90deg,#D4AF37 0%,#F2E7B3 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 </style>
 
 </head>
@@ -134,7 +154,7 @@
         <div class="absolute inset-0 bg-black opacity-20"></div>
         <div class="container mx-auto px-6 text-center relative z-10">
             <div class="animate-fade-in">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">  <span class="block">Mr.U</span>  <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">    Portfolio  </span></h1>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight"><span class="block">Mr.U</span><span class="block hero-gold">Portfolio</span></h1>
                 <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。<br><span class="text-base opacity-90">主な使用ソフト：Blender / ZBrush / Rhinoceros / After Effects / Premiere Pro / FL Studio / Photoshop / Illustrator / Substance 3D Painter / Cascadeur</span></p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#portfolio" class="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
@@ -157,14 +177,14 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="section-dark" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
                     <i class="fas fa-user-circle mr-4 text-gold"></i>プロフィール
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    創造性と技術を融合させ、独創的な作品を生み出すクリエイター
+                    3DCG・造形・ジュエリー・映像・音楽を横断するマルチクリエイター
                 </p>
             </div>
             
@@ -219,13 +239,7 @@
                             <h4 class="font-semibold text-gray-800 mb-3">
                                 <i class="fas fa-tools text-blue-500 mr-2"></i>使用ツール
                             </h4>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Blender</span>
-                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Maya</span>
-                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">ZBrush</span>
-                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Substance Painter</span>
-                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Rhinoceros</span>
-                            </div>
+                            <div class="flex flex-wrap gap-2"><span class="badge">Blender</span><span class="badge">ZBrush</span><span class="badge">Rhinoceros</span><span class="badge">After Effects</span><span class="badge">Premiere Pro</span><span class="badge">FL Studio</span><span class="badge">Photoshop</span><span class="badge">Illustrator</span><span class="badge">Substance 3D Painter</span><span class="badge">Cascadeur</span></div>
                         </div>
                     </div>
                 </div>
@@ -234,7 +248,7 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="py-20 bg-gray-50">
+    <section id="portfolio" class="section-dark" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
@@ -347,7 +361,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900 text-white">
+    <section id="contact" class="section-dark" class="py-20 bg-gray-900 text-white">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-6">
                 <i class="fas fa-envelope mr-4 text-gold"></i>お問い合わせ
@@ -356,26 +370,20 @@
                 作品に関するご質問や制作依頼など、お気軽にお声かけください
             </p>
             
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="bg-gray-800 p-6 rounded-xl">
-                    <i class="fas fa-envelope text-3xl text-gold mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">メール</h3>
-                    <p class="text-gray-300">contact@portfolio.com</p>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-xl">
-                    <i class="fas fa-phone text-3xl text-blue-400 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">電話</h3>
-                    <p class="text-gray-300">090-1234-5678</p>
-                </div>
-                <div class="bg-gray-800 p-6 rounded-xl">
-                    <i class="fas fa-map-marker-alt text-3xl text-green-400 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">所在地</h3>
-                    <p class="text-gray-300">東京都</p>
-                </div>
-            </div>
-            
-            <div class="flex justify-center space-x-6">
-    <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:text-gold transition-colors" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+  <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="card-dark p-6 rounded-xl group transition-colors">
+    <i class="fab fa-x-twitter text-3xl text-gold mb-4"></i>
+    <h3 class="text-xl font-semibold mb-2">X（旧Twitter）</h3>
+    <p class="text-gray-300">DMまたはメンションからお問い合わせください。</p>
+  </a>
+  <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="card-dark p-6 rounded-xl group transition-colors">
+    <i class="fab fa-youtube text-3xl text-gold mb-4"></i>
+    <h3 class="text-xl font-semibold mb-2">YouTube</h3>
+    <p class="text-gray-300">チャンネルの概要欄からご連絡いただけます。</p>
+  </a>
+</div>
+<div class="flex justify-center space-x-6">
+    <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:text-gold transition-colors" aria-label="X"><i class="fab fa-x-twitter"></i></a>
     <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:text-gold transition-colors" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
 </div>
 </section>
