@@ -4,20 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mr.U – Portfolio</title>
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
   <style>
-    /* === Brand: Black / White / Gold === */
     :root {
-      --bg:#0c0c0f;
-      --panel:#141416;
-      --fg:#f6f7fb;
-      --muted:#b4bac4;
-      --line:#24262b;
-      --gold:#D4AF37;
+      --bg:#0c0c0f; --panel:#141416; --fg:#f6f7fb; --muted:#b4bac4; --line:#24262b; --gold:#D4AF37;
     }
     html,body { background:var(--bg); color:var(--fg); }
     a { color: inherit; }
@@ -32,24 +24,17 @@
     .card { background: var(--panel); border: 1px solid rgba(212,175,55,.18); color:var(--fg); }
     .badge { background: rgba(212,175,55,.12); border:1px solid rgba(212,175,55,.35);
               color: var(--gold); border-radius:9999px; padding:.35rem .7rem; font-size:.85rem; }
-
-    /* Grids */
     .u-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
     @media (min-width:768px) { .u-grid { grid-template-columns: 1fr 1fr; gap:1.5rem; } }
     @media (min-width:1024px) { .u-grid-3 { grid-template-columns: repeat(3,1fr); } }
-
-    /* Specialty list (均一化) */
     #about .spec-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
     @media (min-width:768px) { #about .spec-grid { grid-template-columns:1fr 1fr; gap:1.5rem; } }
     #about .spec-grid > * { margin:0 !important; }
-
-    /* Stable categories */
     #categories .cat-grid { display:grid; grid-template-columns:1fr; gap:1rem; }
     @media (min-width:768px) { #categories .cat-grid { grid-template-columns:1fr 1fr; gap:1.25rem; } }
-    #categories .iconbox { width:3rem; height:3rem; border-radius:.7rem;
+    #categories .iconbox, #about .iconbox, #profile .iconbox { width:3rem; height:3rem; border-radius:.7rem;
                             display:flex; align-items:center; justify-content:center;
                             background: rgba(212,175,55,.12); border:1px solid rgba(212,175,55,.35); }
-    /* Section spacing */
     section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
   </style>
 </head>
@@ -63,7 +48,8 @@
         <span class="font-semibold">Mr.U – Portfolio</span>
       </div>
       <nav class="hidden md:flex items-center space-x-6 text-sm text-gray-300">
-        <a href="#about" class="hover:gold">プロフィール</a>
+        <a href="#profile" class="hover:gold">プロフィール</a>
+        <a href="#about" class="hover:gold">専門分野</a>
         <a href="#categories" class="hover:gold">制作カテゴリー</a>
         <a href="#tools" class="hover:gold">使用ツール</a>
         <a href="#portfolio" class="hover:gold">作品集</a>
@@ -90,7 +76,47 @@
 
       <div class="mt-10 flex justify-center gap-4">
         <a href="#portfolio" class="btn-primary px-5 py-3 rounded-lg">作品を見る</a>
-        <a href="#about" class="btn-outline px-5 py-3 rounded-lg">プロフィール</a>
+        <a href="#profile" class="btn-outline px-5 py-3 rounded-lg">プロフィール</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW: Profile section -->
+  <section id="profile">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="card rounded-2xl p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">プロフィール</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <p class="text-gray-300 leading-relaxed">
+              3DCG・造形・映像・音楽を横断する<span class="badge">マルチクリエイター</span>。<br/>
+              設計思考で構図・動き・音を統合し、体験としての“作品”をデザインします。
+            </p>
+            <ul class="mt-4 space-y-2 text-sm text-gray-300">
+              <li><i class="fa-solid fa-check gold mr-2"></i>造形からアニメーション、編集、BGM制作まで一気通貫</li>
+              <li><i class="fa-solid fa-check gold mr-2"></i>黒・白・金を基調にしたスタイリッシュな表現</li>
+              <li><i class="fa-solid fa-check gold mr-2"></i>アイデア優先、迅速なプロトタイピング</li>
+            </ul>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="card rounded-xl p-4">
+              <div class="text-xs text-gray-400 mb-1">得意領域</div>
+              <div class="font-semibold">キャラクター表現 / 映像演出</div>
+            </div>
+            <div class="card rounded-xl p-4">
+              <div class="text-xs text-gray-400 mb-1">制作スタイル</div>
+              <div class="font-semibold">短サイクル・高密度の試作</div>
+            </div>
+            <div class="card rounded-xl p-4">
+              <div class="text-xs text-gray-400 mb-1">使用カラー</div>
+              <div class="font-semibold">Black / White / Gold</div>
+            </div>
+            <a href="#contact" class="card rounded-xl p-4 hover:opacity-90">
+              <div class="text-xs text-gray-400 mb-1">連絡方法</div>
+              <div class="font-semibold flex items-center gap-2">X と YouTube<i class="fa-solid fa-arrow-right ml-1"></i></div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -126,7 +152,7 @@
     </div>
   </section>
 
-  <!-- Categories (stable grid, no slider bug) -->
+  <!-- Categories -->
   <section id="categories">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-3">制作カテゴリー</h2>
@@ -245,7 +271,7 @@
     </div>
   </section>
 
-  <!-- Portfolio (建築は一カード扱い) -->
+  <!-- Portfolio -->
   <section id="portfolio">
     <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-3">作品集</h2>
@@ -310,10 +336,8 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="py-8 text-center text-sm text-gray-400 border-t border-[color:var(--line)]">
     &copy; 2025 Mr.U – Portfolio. All rights reserved.
   </footer>
-
 </body>
 </html>
