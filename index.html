@@ -1,405 +1,303 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mr.U – Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <style>
-    :root {
-      --bg:#0c0c0f; --panel:#141416; --fg:#f6f7fb; --muted:#b4bac4; --line:#24262b; --gold:#D4AF37;
-    }
-    html,body { background:var(--bg); color:var(--fg); }
-    a { color: inherit; }
-    header { position:sticky; top:0; z-index:50; background:rgba(12,12,15,.85);
-              backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
-    .hero-title { letter-spacing: .02em; }
-    .gold { color: var(--gold) !important; }
-    .btn-primary { background: var(--gold); color:#111; border: none; }
-    .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); }
-    .btn-outline { border:1.5px solid var(--gold); }
-    .btn-outline:hover { background: rgba(212,175,55,.08); }
-    .card { background: var(--panel); border: 1px solid rgba(212,175,55,.18); color:var(--fg); }
-    .badge { background: rgba(212,175,55,.12); border:1px solid rgba(212,175,55,.35);
-              color: var(--gold); border-radius:9999px; padding:.35rem .7rem; font-size:.85rem; }
-    .u-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
-    @media (min-width:768px) { .u-grid { grid-template-columns: 1fr 1fr; gap:1.5rem; } }
-    @media (min-width:1024px) { .u-grid-3 { grid-template-columns: repeat(3,1fr); } }
-    #about .spec-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
-    @media (min-width:768px) { #about .spec-grid { grid-template-columns:1fr 1fr; gap:1.5rem; } }
-    #about .spec-grid > * { margin:0 !important; }
-    #categories .cat-grid { display:grid; grid-template-columns:1fr; gap:1rem; }
-    @media (min-width:768px) { #categories .cat-grid { grid-template-columns:1fr 1fr; gap:1.25rem; } }
-    #categories .iconbox, #about .iconbox, #profile .iconbox { width:3rem; height:3rem; border-radius:.7rem;
-                            display:flex; align-items:center; justify-content:center;
-                            background: rgba(212,175,55,.12); border:1px solid rgba(212,175,55,.35); }
-    section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
-  
-    /* Hero background image hook */
-    .hero{position:relative; overflow:hidden;
-      background: radial-gradient(1200px 600px at 10% -10%, rgba(212,175,55,.08), transparent 60%),
-                  radial-gradient(900px 500px at 110% 20%, rgba(212,175,55,.06), transparent 55%);
-    }
-    .hero::before{
-      content:""; position:absolute; inset:0; z-index:-2;
-      background-image: var(--hero-image, none);
-      background-size: cover; background-position: center;
-      filter: saturate(1) contrast(1.05) brightness(.65);
-      transform: scale(1.02);
-    }
-    .hero::after{
-      content:""; position:absolute; inset:0; z-index:-1;
-      background: linear-gradient(to bottom, rgba(12,12,15,.45), rgba(12,12,15,.65));
-    }
-  
-  html{scroll-behavior:smooth;}
-  section{scroll-margin-top:84px;}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr.U – Portfolio</title>
+    <!-- TailwindCSS via CDN for quick styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+      /* Define a dark theme and custom colors */
+      :root{
+        --bg:#0b0b0c;
+        --fg:#f5f5f5;
+        --gold:#d4af37;
+        --card:#141416;
+        --card-border:rgba(212,175,55,0.4);
+      }
+      body{
+        background:var(--bg);
+        color:var(--fg);
+        font-family:'Inter', 'Noto Sans JP', sans-serif;
+        scroll-behavior:smooth;
+      }
+      /* Reusable button styles */
+      .btn{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:0.5rem 1.25rem;
+        font-size:0.875rem;
+        border-radius:0.5rem;
+        border-width:1px;
+        font-weight:500;
+        transition:background-color .2s,color .2s;
+      }
+      .btn-primary{
+        color:var(--bg);
+        background:var(--gold);
+        border-color:var(--gold);
+      }
+      .btn-primary:hover{
+        background:var(--fg);
+        color:var(--bg);
+      }
+      .btn-outline{
+        color:var(--gold);
+        border-color:var(--gold);
+      }
+      .btn-outline:hover{
+        background:var(--gold);
+        color:var(--bg);
+      }
+      /* Section headings */
+      .section-title{
+        font-size:1.5rem;
+        font-weight:700;
+        margin-bottom:1rem;
+      }
+      /* Card styling */
+      .card{
+        background:var(--card);
+        border:1px solid var(--card-border);
+        border-radius:0.75rem;
+        padding:1.5rem;
+      }
+      .portfolio-card{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        gap:1rem;
+      }
+      iframe{
+        width:100%;
+        aspect-ratio:16/9;
+        border-radius:0.5rem;
+      }
+      /* Ensure anchor scroll offset for fixed header */
+      section{scroll-margin-top:96px;}
+    </style>
 </head>
-<body class="antialiased selection:bg-yellow-200/20">
-
-  <!-- Header -->
-  <header>
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <i class="fa-solid fa-cube gold"></i>
-        <span class="font-semibold">Mr.U – Portfolio</span>
+<body>
+  <!-- Navigation / Hero section -->
+  <header class="w-full fixed top-0 left-0 z-40 bg-transparent">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-cube text-xl" style="color:var(--gold)"></i>
+        <span class="font-semibold text-lg">Mr.U – Portfolio</span>
       </div>
-      <nav class="hidden md:flex items-center space-x-6 text-sm text-gray-300">
-        <a href="#profile" class="hover:gold">プロフィール</a>
-        <a href="#about" class="hover:gold">専門分野</a>
-        <a href="#categories" class="hover:gold">制作カテゴリー</a>
-        <a href="#tools" class="hover:gold">使用ツール</a>
-        <a href="#portfolio" class="hover:gold">作品集</a>
-        <a href="#contact" class="hover:gold">お問い合わせ</a>
-      </nav>
-    </div>
+      <div class="md:flex hidden items-center gap-6">
+        <a href="#portfolio" class="text-sm hover:text-gold">作品集</a>
+        <a href="#profile" class="text-sm hover:text-gold">プロフィール</a>
+        <a href="#contact" class="text-sm hover:text-gold">お問い合わせ</a>
+      </div>
+      <button class="md:hidden text-xl"><i class="fas fa-bars"></i></button>
+    </nav>
   </header>
 
-  <!-- Hero -->
-  <section id="hero" class="hero pt-10 pb-14" style="--hero-image: url('assets/hero.jpg')">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h1 class="text-5xl md:text-7xl font-extrabold hero-title">
-        <span class="block">Mr.U</span>
-        <span class="block gold">Portfolio</span>
-      </h1>
-      <p class="text-xl md:text-2xl mt-6">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。</p>
+  <!-- Hero Section -->
+  <section id="top" class="relative w-full flex flex-col justify-center items-center text-center pt-32 pb-12 px-6" style="background-image:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.9));">
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Mr.U<br><span class="text-gold">Portfolio</span></h1>
+    <p class="max-w-2xl text-center mb-6 leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。</p>
+    <div class="flex justify-center gap-4 mb-4">
+      <a href="https://x.com/nlimited_u_?s=21" target="_blank" class="text-2xl hover:text-gold"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" class="text-2xl hover:text-gold"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#portfolio" class="btn btn-primary">作品を見る</a>
+      <a href="#profile" class="btn btn-outline">プロフィール</a>
+    </div>
+  </section>
 
-      <div class="mt-8 flex justify-center space-x-6">
-        <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:gold" aria-label="X">
-          <i class="fab fa-x-twitter"></i></a>
-        <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:gold" aria-label="YouTube">
-          <i class="fab fa-youtube"></i></a>
-      </div>
-
-      <div class="mt-10 flex justify-center gap-4">
-        <a href="#portfolio" class="btn primary">作品を見る</a>
-        <a href="#profile" class="btn-outline px-5 py-3 rounded-lg">プロフィール</a>
+  <!-- Profile Section -->
+  <section id="profile" class="max-w-5xl mx-auto px-6 py-12">
+    <div class="card">
+      <h2 class="section-title">プロフィール</h2>
+      <p class="mb-4">3DCG・造形・映像・音楽を横断する <span class="px-2 py-1 rounded-full border border-gold text-gold">"マルチクリエイター"</span>。</p>
+      <p class="mb-6">設計思考で構図・動き・音を統合し、体験としての“作品”をデザインします。</p>
+      <ul class="space-y-3 mb-6">
+        <li class="flex gap-2"><i class="fas fa-check text-gold pt-1"></i>造形からアニメーション、編集、BGM制作まで一気通貫</li>
+        <li class="flex gap-2"><i class="fas fa-check text-gold pt-1"></i>設計思考と大胆な演出で、機能と美を両立</li>
+        <li class="flex gap-2"><i class="fas fa-check text-gold pt-1"></i>アイデア優先、迅速なプロトタイピング</li>
+      </ul>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="card flex flex-col"><span class="text-sm text-gray-400 mb-1">得意領域</span><span class="text-lg font-semibold">コンセプトメイキング / 映像演出</span></div>
+        <div class="card flex flex-col"><span class="text-sm text-gray-400 mb-1">制作スタイル</span><span class="text-lg font-semibold">短サイクル・高密度の試作</span></div>
+        <div class="card flex flex-col"><span class="text-sm text-gray-400 mb-1">表現キーワード</span><span class="text-lg font-semibold">質感とライティング / カメラワーク / 音同期</span></div>
+        <div class="card flex flex-col"><span class="text-sm text-gray-400 mb-1">連絡方法</span><span class="text-lg font-semibold">X と YouTube</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Profile -->
-  <section id="profile">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="card rounded-2xl p-6 md:p-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-4">プロフィール</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <p class="text-gray-300 leading-relaxed">
-              3DCG・造形・映像・音楽を横断する<br/>
-              <span class="badge inline-block whitespace-nowrap mt-2">"マルチクリエイター"</span>
-            </p>
-            <p class="text-gray-300 leading-relaxed mt-3">
-              設計思考で構図・動き・音を統合し、体験としての“作品”をデザインします。
-            </p>
-            <ul class="mt-4 space-y-2 text-sm text-gray-300">
-              <li><i class="fa-solid fa-check gold mr-2"></i>造形からアニメーション、編集、BGM制作まで一気通貫</li>
-              <li><i class="fa-solid fa-check gold mr-2"></i>設計思考と大胆な演出で、機能と美を両立</li>
-              <li><i class="fa-solid fa-check gold mr-2"></i>アイデア優先、迅速なプロトタイピング</li>
-            </ul>
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-            <div class="card rounded-xl p-4">
-              <div class="text-xs text-gray-400 mb-1">得意領域</div>
-              <div class="font-semibold">コンセプトメイキング / 映像演出</div>
-            </div>
-            <div class="card rounded-xl p-4">
-              <div class="text-xs text-gray-400 mb-1">制作スタイル</div>
-              <div class="font-semibold">短サイクル・高密度の試作</div>
-            </div>
-            <div class="card rounded-xl p-4">
-              <div class="text-xs text-gray-400 mb-1">表現キーワード</div>
-              <div class="font-semibold">質感とライティング / カメラワーク / 音同期</div>
-            </div>
-            <a href="#contact" class="card rounded-xl p-4 hover:opacity-90">
-              <div class="text-xs text-gray-400 mb-1">連絡方法</div>
-              <div class="font-semibold flex items-center gap-2">X と YouTube<i class="fa-solid fa-arrow-right ml-1"></i></div>
-            </a>
-          </div>
+  <!-- About / Expertise Section -->
+  <section id="about" class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="section-title">専門分野</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="card flex gap-4 items-start">
+        <i class="fas fa-video text-2xl" style="color:var(--gold)"></i>
+        <div>
+          <h3 class="font-semibold mb-1">3DCGアニメーション</h3>
+          <p class="text-gray-300 text-sm">映像制作・キャラクターアニメーション</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- About / Specialties -->
-  <section id="about">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="card rounded-2xl p-6 md:p-8">
-        <h2 class="text-2xl md:text-3xl font-bold mb-3">専門分野</h2>
-        <div class="spec-grid">
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-video gold"></i></div>
-            <div><h3 class="text-lg font-semibold">3DCGアニメーション</h3>
-              <p class="text-gray-300 text-sm">映像制作・キャラクターアニメーション</p></div>
-          </div>
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-chess-knight gold"></i></div>
-            <div><h3 class="text-lg font-semibold">フィギュア制作</h3>
-              <p class="text-gray-300 text-sm">オリジナルフィギュア・スカルプティング</p></div>
-          </div>
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-gem gold"></i></div>
-            <div><h3 class="text-lg font-semibold">ジュエリーデザイン</h3>
-              <p class="text-gray-300 text-sm">アクセサリー・宝石デザイン</p></div>
-          </div>
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-building gold"></i></div>
-            <div><h3 class="text-lg font-semibold">建築ビジュアライズ</h3>
-              <p class="text-gray-300 text-sm">内装・外装・空間デザイン</p></div>
-          </div>
+      <div class="card flex gap-4 items-start">
+        <i class="fas fa-chess-knight text-2xl" style="color:var(--gold)"></i>
+        <div>
+          <h3 class="font-semibold mb-1">フィギュア制作</h3>
+          <p class="text-gray-300 text-sm">オリジナルフィギュア・スカルプティング</p>
+        </div>
+      </div>
+      <div class="card flex gap-4 items-start">
+        <i class="fas fa-gem text-2xl" style="color:var(--gold)"></i>
+        <div>
+          <h3 class="font-semibold mb-1">ジュエリーデザイン</h3>
+          <p class="text-gray-300 text-sm">アクセサリー・宝石デザイン</p>
+        </div>
+      </div>
+      <div class="card flex gap-4 items-start">
+        <i class="fas fa-building text-2xl" style="color:var(--gold)"></i>
+        <div>
+          <h3 class="font-semibold mb-1">建築ビジュアライズ</h3>
+          <p class="text-gray-300 text-sm">内装・外装・空間デザイン</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Categories -->
-  <section id="categories">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold mb-3">制作カテゴリー</h2>
-      <p class="text-gray-300 mb-6">それぞれの分野で独自のスタイルと技法を追求しています。</p>
-      <div class="cat-grid">
-        <article class="card rounded-xl p-6">
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-video gold"></i></div>
-            <div><h3 class="text-xl font-semibold mb-1">3DCGアニメーション</h3>
-              <p class="text-gray-300 text-sm">キャラクターアニメーションから映像制作・VFXまで。</p></div>
-          </div>
-        </article>
-        <article class="card rounded-xl p-6">
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-chess-knight gold"></i></div>
-            <div><h3 class="text-xl font-semibold mb-1">フィギュア制作</h3>
-              <p class="text-gray-300 text-sm">オリジナルフィギュア・スカルプティング。</p></div>
-          </div>
-        </article>
-        <article class="card rounded-xl p-6">
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-gem gold"></i></div>
-            <div><h3 class="text-xl font-semibold mb-1">ジュエリーデザイン</h3>
-              <p class="text-gray-300 text-sm">アクセサリー・宝石デザイン。</p></div>
-          </div>
-        </article>
-        <article class="card rounded-xl p-6">
-          <div class="flex items-start space-x-4">
-            <div class="iconbox" aria-hidden="true"><i class="fas fa-building gold"></i></div>
-            <div><h3 class="text-xl font-semibold mb-1">建築ビジュアライズ</h3>
-              <p class="text-gray-300 text-sm">内外観レンダリング／ウォークスルー／マテリアル提案。</p></div>
-          </div>
-        </article>
+  <!-- Production Categories Section -->
+  <section id="categories" class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="section-title">制作カテゴリー</h2>
+    <p class="mb-6 text-gray-300">それぞれの分野で独自のスタイルと技法を追求しています。</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card">
+        <div class="flex gap-3 items-start mb-2">
+          <i class="fas fa-video text-2xl" style="color:var(--gold)"></i>
+          <h3 class="font-semibold">3DCGアニメーション</h3>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">キャラクターアニメーションから映像制作・VFXまで。</p>
+      </div>
+      <div class="card">
+        <div class="flex gap-3 items-start mb-2">
+          <i class="fas fa-chess-knight text-2xl" style="color:var(--gold)"></i>
+          <h3 class="font-semibold">フィギュア制作</h3>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">オリジナルフィギュア・スカルプティング。</p>
+      </div>
+      <div class="card">
+        <div class="flex gap-3 items-start mb-2">
+          <i class="fas fa-gem text-2xl" style="color:var(--gold)"></i>
+          <h3 class="font-semibold">ジュエリーデザイン</h3>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">アクセサリー・宝石デザイン。</p>
+      </div>
+      <div class="card">
+        <div class="flex gap-3 items-start mb-2">
+          <i class="fas fa-building text-2xl" style="color:var(--gold)"></i>
+          <h3 class="font-semibold">建築ビジュアライズ</h3>
+        </div>
+        <p class="text-gray-300 text-sm mb-3">内外観レンダリング／ウォークスルー／マテリアル提案。</p>
       </div>
     </div>
   </section>
 
-  <!-- Tools -->
-  <section id="tools">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold mb-3">使用ツール</h2>
-      <p class="text-gray-300 mb-6">主に以下のソフトウェア・ツールを使用しています。</p>
-      <div class="u-grid u-grid-3">
-        
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-cube gold"></i>
-            <h3 class="font-semibold">Blender</h3>
-          </div>
-          <p class="text-gray-300 text-sm">3Dモデリング・アニメーション</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-drafting-compass gold"></i>
-            <h3 class="font-semibold">ZBrush</h3>
-          </div>
-          <p class="text-gray-300 text-sm">デジタルスカルプティング</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-shapes gold"></i>
-            <h3 class="font-semibold">Rhinoceros</h3>
-          </div>
-          <p class="text-gray-300 text-sm">3D CAD・プロダクトデザイン</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-wand-magic-sparkles gold"></i>
-            <h3 class="font-semibold">After Effects</h3>
-          </div>
-          <p class="text-gray-300 text-sm">モーショングラフィックス・VFX</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-film gold"></i>
-            <h3 class="font-semibold">Premiere Pro</h3>
-          </div>
-          <p class="text-gray-300 text-sm">動画編集</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-music gold"></i>
-            <h3 class="font-semibold">FL Studio</h3>
-          </div>
-          <p class="text-gray-300 text-sm">音楽制作</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-image gold"></i>
-            <h3 class="font-semibold">Photoshop</h3>
-          </div>
-          <p class="text-gray-300 text-sm">画像編集・レタッチ</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-pen-nib gold"></i>
-            <h3 class="font-semibold">Illustrator</h3>
-          </div>
-          <p class="text-gray-300 text-sm">ベクターグラフィック</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-paintbrush gold"></i>
-            <h3 class="font-semibold">Substance 3D Painter</h3>
-          </div>
-          <p class="text-gray-300 text-sm">3Dテクスチャリング</p>
-        </div>
-        <div class="card rounded-xl p-5">
-          <div class="flex items-center space-x-3 mb-2">
-            <i class="fa-solid fa-person-running gold"></i>
-            <h3 class="font-semibold">Cascadeur</h3>
-          </div>
-          <p class="text-gray-300 text-sm">物理ベースアニメ</p>
-        </div>
+  <!-- Tools Section -->
+  <section id="tools" class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="section-title">使用ツール</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-cube"></i> Blender</h3>
+        <p class="text-sm text-gray-300">3Dモデリング・アニメーション</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-hammer"></i> ZBrush</h3>
+        <p class="text-sm text-gray-300">デジタルスカルプティング</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-drafting-compass"></i> Rhinoceros</h3>
+        <p class="text-sm text-gray-300">3D CAD・プロダクトデザイン</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-bolt"></i> After Effects</h3>
+        <p class="text-sm text-gray-300">モーショングラフィックス・VFX</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-video"></i> Premiere Pro</h3>
+        <p class="text-sm text-gray-300">動画編集</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-music"></i> FL Studio</h3>
+        <p class="text-sm text-gray-300">音楽制作</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-image"></i> Photoshop</h3>
+        <p class="text-sm text-gray-300">画像編集・レタッチ</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-vector-square"></i> Illustrator</h3>
+        <p class="text-sm text-gray-300">ベクターグラフィック</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-paint-brush"></i> Substance 3D Painter</h3>
+        <p class="text-sm text-gray-300">3Dテクスチャリング</p>
+      </div>
+      <div class="card" style="background:rgba(212,175,55,0.05)">
+        <h3 class="font-semibold text-gold mb-1 flex items-center gap-2"><i class="fas fa-running"></i> Cascadeur</h3>
+        <p class="text-sm text-gray-300">物理ベースアニメ</p>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio -->
-  \1
-        <article class="card rounded-xl overflow-hidden">
-          <div class="relative aspect-video bg-black/60">
-            <iframe class="absolute inset-0 w-full h-full"
-              src="https://www.youtube-nocookie.com/embed/WW-GrN05sFQ"
-              title="ones of truth – プロダクトPR（フル3DCG）"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen></iframe>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">ones of truth – プロダクトPR（1分 / フル3DCG）</h3>
-            <p class="text-gray-300 text-sm mt-2">
-              コンセプト設計から3Dモデル制作、アニメーション、楽曲制作（歌唱収録含む）、編集までを一人で完遂。
-              製品の質感と機能性を「音と動き」で訴求する、演出重視のモーショングラフィックス作品。
-            </p>
-            <div class="flex flex-wrap gap-2 mt-3 text-xs">
-              <span class="badge">Blender</span>
-              <span class="badge">Substance 3D Painter</span>
-              <span class="badge">FL Studio</span>
-              <span class="badge">After Effects</span>
-              <span class="badge">Premiere Pro</span>
-            </div>
-            <div class="mt-3">
-              <a href="https://youtu.be/WW-GrN05sFQ" target="_blank" rel="noopener" class="text-sm hover:underline gold">YouTubeで見る</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card rounded-xl overflow-hidden">
-          <div class="aspect-video bg-black/40 flex items-center justify-center">
-            <i class="fas fa-building gold text-3xl"></i>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">建築ビジュアライズ</h3>
-            <p class="text-gray-300 text-sm mt-1">外観/内観レンダリング、ウォークスルー等</p>
-          </div>
-        </article>
-        <article class="card rounded-xl overflow-hidden">
-          <div class="aspect-video bg-black/40 flex items-center justify-center">
-            <i class="fas fa-person-running gold text-3xl"></i>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">キャラクターアニメーション</h3>
-            <p class="text-gray-300 text-sm mt-1">動きと演出の実験</p>
-          </div>
-        </article>
-        <article class="card rounded-xl overflow-hidden">
-          <div class="aspect-video bg-black/40 flex items-center justify-center">
-            <i class="fas fa-gem gold text-3xl"></i>
-          </div>
-          <div class="p-4">
-            <h3 class="text-lg font-semibold">ジュエリーデザイン</h3>
-            <p class="text-gray-300 text-sm mt-1">宝石・アクセサリー案</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  \1\2作品集\4
-    <div class="u-grid u-grid-3">
-    </div>
-  </div>
-</section>
-
-\1
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold mb-3">お問い合わせ</h2>
-      <p class="text-gray-300 mb-6">作品に関するご質問や制作依頼など、お気軽にお声かけください</p>
-      <div class="u-grid">
-        <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="card rounded-xl p-6 block">
-          <div class="flex items-center space-x-3">
-            <i class="fab fa-x-twitter text-2xl gold"></i>
-            <div>
-              <h3 class="text-xl font-semibold">X（旧Twitter）</h3>
-              <p class="text-gray-300 text-sm">DMまたはメンションからお問い合わせください。</p>
-            </div>
-          </div>
-        </a>
-        <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="card rounded-xl p-6 block">
-          <div class="flex items-center space-x-3">
-            <i class="fab fa-youtube text-2xl gold"></i>
-            <div>
-              <h3 class="text-xl font-semibold">YouTube</h3>
-              <p class="text-gray-300 text-sm">チャンネルの概要欄からご連絡いただけます。</p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="py-8 text-center text-sm text-gray-400 border-t border-[color:var(--line)]">
-    &copy; 2025 Mr.U – Portfolio. All rights reserved.
-  
-<section id="portfolio">
-  <div class="container">
+  <!-- Portfolio Section -->
+  <section id="portfolio" class="max-w-5xl mx-auto px-6 py-12">
     <h2 class="section-title">作品集</h2>
-    <div class="u-grid u-grid-3"></div>
-  </div>
-</section>
+    <div class="grid gap-6">
+      <!-- First video card -->
+      <div class="portfolio-card card">
+        <iframe src="https://www.youtube-nocookie.com/embed/WW-GrN05sFQ" title="ones of truth – PR Video" loading="lazy" allowfullscreen></iframe>
+        <h3 class="text-lg font-semibold">ones of truth – プロダクトPR（1分 / フル3DCG）</h3>
+        <p class="text-sm text-gray-300">コンセプト設計から3Dモデル制作、アニメーション、楽曲制作（歌唱収録含む）、編集までを一人で完遂。製品の質感と機能性を「音と動き」で訴求する、演出重視のモーショングラフィックス作品。</p>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Blender</span>
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Substance 3D Painter</span>
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">FL Studio</span>
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">After Effects</span>
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Premiere Pro</span>
+        </div>
+        <a href="https://youtu.be/WW-GrN05sFQ" target="_blank" class="text-gold text-sm mt-2 underline">YouTubeで見る</a>
+      </div>
+      <!-- Additional works can be added here -->
+    </div>
+  </section>
 
-</footer>
+  <!-- Contact Section -->
+  <section id="contact" class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="section-title">お問い合わせ</h2>
+    <p class="mb-6 text-gray-300">作品に関するご質問や制作依頼など、お気軽にお声かけください。</p>
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="card flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-x-twitter text-xl" style="color:var(--gold)"></i>
+          <h3 class="font-semibold">X（旧Twitter）</h3>
+        </div>
+        <p class="text-sm text-gray-300">DMまたはメンションからお問い合わせください。</p>
+        <a href="https://x.com/nlimited_u_?s=21" target="_blank" class="text-gold text-sm underline">Xを見る</a>
+      </div>
+      <div class="card flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-youtube text-xl" style="color:var(--gold)"></i>
+          <h3 class="font-semibold">YouTube</h3>
+        </div>
+        <p class="text-sm text-gray-300">チャンネルの概要欄からご連絡いただけます。</p>
+        <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" class="text-gold text-sm underline">YouTubeを見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 bg-transparent text-center text-xs border-t border-gray-800">
+    © 2025 Mr.U – Portfolio. All rights reserved.
+  </footer>
 </body>
 </html>
