@@ -87,6 +87,18 @@
 @media(min-width:768px){#about .specialty-grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
 #about .specialty-grid>*{margin:0!important}
 
+
+/* ==== v5 robust fixes ==== */
+.card-dark{background:#141416!important;color:var(--fg)!important;border:1px solid rgba(212,175,55,.18)!important}
+/* Placeholder class if we inject a stable categories grid */
+#categories.stable-grid .grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media(min-width:768px){#categories.stable-grid .grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
+#categories.stable-grid .grid>*{margin:0!important}
+/* About specialties: enforce uniform gap regardless of original utilities */
+#about .uniform-specialties{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media(min-width:768px){#about .uniform-specialties{grid-template-columns:1fr 1fr;gap:1.5rem}}
+#about .uniform-specialties>*{margin:0!important}
+
 </style>
 
 <style>
@@ -872,5 +884,84 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 0) Remove "主な使用ソフト" line in hero if残っていたら
+  const heroP = document.querySelector('p.text-xl, p[class*="text-2xl"]');
+  if (heroP && /主な使用ソフト/.test(heroP.innerText)) {
+    heroP.innerHTML = heroP.innerHTML.replace(/<br[^>]*><span[^>]*>主な使用ソフト[\s\S]*?<\/span>/, '');
+  }
+
+  // 1) Replace the buggy "制作カテゴリー" section with a stable grid
+  const findSectionByH2 = (text) => {
+    const secs = Array.from(document.querySelectorAll('section'));
+    for (const s of secs) {
+      const h2 = s.querySelector('h2');
+      if (h2 && h2.textContent.replace(/\s/g,'').includes(text.replace(/\s/g,''))) return s;
+    }
+    return null;
+  };
+  const buggy = findSectionByH2('制作カテゴリー');
+  if (buggy) {
+    const wrapper = document.createElement('section');
+    wrapper.id = 'categories';
+    wrapper.className = 'section-dark py-16 stable-grid';
+    wrapper.innerHTML = `
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">制作カテゴリー</h2>
+        <p class="text-gray-300 mb-8">それぞれの分野で独自のスタイルと技法を追求しています。</p>
+        <div class="grid">
+          ${[
+            {icon:'fa-video', title:'3DCGアニメーション', desc:'キャラクターアニメーションから映像制作・VFXまで。'},
+            {icon:'fa-chess-knight', title:'フィギュア制作', desc:'オリジナルフィギュア・スカルプティング。'},
+            {icon:'fa-gem', title:'ジュエリーデザイン', desc:'アクセサリー・宝石デザイン。'},
+            {icon:'fa-building', title:'建築ビジュアライズ', desc:'内外観レンダリング／ウォークスルー／マテリアル提案。'}
+          ].map(c => `
+            <article class="card-dark rounded-xl p-6">
+              <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
+                  <i class="fas ${c.icon} text-gold text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-semibold mb-1">${c.title}</h3>
+                  <p class="text-gray-300 text-sm">${c.desc}</p>
+                </div>
+              </div>
+            </article>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    buggy.replaceWith(wrapper);
+  }
+
+  // 2) Normalize "専門分野" spacing under #about
+  const about = document.getElementById('about');
+  if (about) {
+    // find the container that holds the specialty items (the list with icons)
+    // heuristic: the first .grid that appears after an element whose text includes "専門分野"
+    const titleEl = Array.from(about.querySelectorAll('*')).find(el => /専門分野/.test(el.textContent));
+    let grid = null;
+    if (titleEl) {
+      let cur = titleEl;
+      for (let i=0;i<20;i++){ // search nearby
+        cur = cur.nextElementSibling;
+        if (!cur) break;
+        if (cur.className && cur.className.includes('grid')) { grid = cur; break; }
+      }
+    }
+    if (!grid) grid = about.querySelector('.grid');
+    if (grid) {
+      grid.classList.add('uniform-specialties');
+      // remove odd margins on children
+      Array.from(grid.children).forEach(ch => {
+        ch.style.margin = '0';
+      });
+    }
+  }
+});
+</script>
+
 </body>
 </html>
