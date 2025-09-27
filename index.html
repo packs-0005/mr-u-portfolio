@@ -1,962 +1,319 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr.U – Portfolio</title>
-    
-    <!-- TailwindCSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .category-card {
-            transition: all 0.3s ease;
-            transform: translateY(0);
-        }
-        
-        .category-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .artwork-item {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .artwork-item:hover {
-            transform: scale(1.05);
-        }
-        
-        .modal-overlay {
-            backdrop-filter: blur(10px);
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-        
-        .modal-content {
-            animation: modalSlideIn 0.3s ease-out;
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        .category-filter.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        .loading-spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    
-/* ==== layout fixes ==== */
-#about .specialty-grid{grid-template-columns:1fr;gap:1.25rem}
-@media(min-width:768px){#about .specialty-grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
-#about .specialty-grid>*{margin:0!important}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mr.U – Portfolio</title>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
+  <style>
+    /* === Brand: Black / White / Gold === */
+    :root {
+      --bg:#0c0c0f;
+      --panel:#141416;
+      --fg:#f6f7fb;
+      --muted:#b4bac4;
+      --line:#24262b;
+      --gold:#D4AF37;
+    }
+    html,body { background:var(--bg); color:var(--fg); }
+    a { color: inherit; }
+    header { position:sticky; top:0; z-index:50; background:rgba(12,12,15,.85);
+              backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+    .hero-title { letter-spacing: .02em; }
+    .gold { color: var(--gold) !important; }
+    .btn-primary { background: var(--gold); color:#111; border: none; }
+    .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); }
+    .btn-outline { border:1.5px solid var(--gold); }
+    .btn-outline:hover { background: rgba(212,175,55,.08); }
+    .card { background: var(--panel); border: 1px solid rgba(212,175,55,.18); color:var(--fg); }
+    .badge { background: rgba(212,175,55,.12); border:1px solid rgba(212,175,55,.35);
+              color: var(--gold); border-radius:9999px; padding:.35rem .7rem; font-size:.85rem; }
 
-/* === v7 targeted fixes (non-destructive) === */
-:root{ --mru-gold:#D4AF37; }
-.card-dark{background:#141416;color:#f7f7fa;border:1px solid rgba(212,175,55,.18)}
-/* Stable categories layout (replaces slider visually) */
-#categories.v7-stable .grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
-@media(min-width:768px){#categories.v7-stable .grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
-#categories.v7-stable .grid > *{margin:0 !important}
-/* Uniformize specialty spacing */
-#about .uniform-specialties{display:grid;grid-template-columns:1fr;gap:1.25rem}
-@media(min-width:768px){#about .uniform-specialties{grid-template-columns:1fr 1fr;gap:1.5rem}}
-#about .uniform-specialties > *{margin:0 !important}
+    /* Grids */
+    .u-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
+    @media (min-width:768px) { .u-grid { grid-template-columns: 1fr 1fr; gap:1.5rem; } }
+    @media (min-width:1024px) { .u-grid-3 { grid-template-columns: repeat(3,1fr); } }
 
-</style>
+    /* Specialty list (均一化) */
+    #about .spec-grid { display:grid; grid-template-columns:1fr; gap:1.25rem; }
+    @media (min-width:768px) { #about .spec-grid { grid-template-columns:1fr 1fr; gap:1.5rem; } }
+    #about .spec-grid > * { margin:0 !important; }
 
-<style>
-:root{--bg:#0b0b0c;--fg:#f5f7fb;--muted:#aab1ba;--gold:#D4AF37}
-html,body{background:var(--bg)!important;color:var(--fg)!important}
-a{color:inherit}
-.text-gold{color:var(--gold)!important}.hover\:text-gold:hover{color:var(--gold)!important}
-.bg-gold{background-color:var(--gold)!important;color:#111!important}
-.border-gold{border-color:var(--gold)!important}
-.bg-white,.bg-gray-50,.bg-gray-100,.bg-gray-200{background:transparent!important}
-.text-gray-800{color:#e8ecf4!important}.text-gray-700{color:#d8dde6!important}.text-gray-600{color:#c0c7d1!important}.text-gray-500{color:#adb4be!important}
-.border-gray-200{border-color:#2a2d31!important}
-.card-dark{background:#141416!important;color:var(--fg)!important;border:1px solid rgba(212,175,55,.18)!important}
-.section-dark [class*="bg-gradient-to-"]{background-image:none!important}
-header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #2a2d31}
-.badge{background:rgba(212,175,55,.12);color:var(--gold);border:1px solid rgba(212,175,55,.35);padding:.25rem .6rem;border-radius:9999px;display:inline-block;font-size:.85rem}
-.btn-primary{background:var(--gold);color:#111;border:none}
-.btn-primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
-.btn-ghost{border:1.5px solid var(--gold);color:var(--fg)}
-.btn-ghost:hover{background:rgba(212,175,55,.08)}
-.hero-gold{background-image:linear-gradient(90deg,#D4AF37 0%,#F2E7B3 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-#about [class*="bg-white"],#about [class*="bg-gray-"],#about [class*="bg-gradient-to-"],#about [class*="from-"],#about [class*="to-"],#about [class*="backdrop-blur"]{background:#141416!important;background-image:none!important;color:var(--fg)!important;border:1px solid rgba(212,175,55,.16)!important}
-#about .text-gray-800,#about .text-gray-700,#about .text-gray-600,#about .text-gray-500,#about p,#about li,#about h3{color:#e9edf5!important}
-#about [class*="opacity-"]{opacity:1!important}
-#about i{color:var(--gold)!important}
-</style>
-
+    /* Stable categories */
+    #categories .cat-grid { display:grid; grid-template-columns:1fr; gap:1rem; }
+    @media (min-width:768px) { #categories .cat-grid { grid-template-columns:1fr 1fr; gap:1.25rem; } }
+    #categories .iconbox { width:3rem; height:3rem; border-radius:.7rem;
+                            display:flex; align-items:center; justify-content:center;
+                            background: rgba(212,175,55,.12); border:1px solid rgba(212,175,55,.35); }
+    /* Section spacing */
+    section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md shadow-lg z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-gray-800">
-                    <i class="fas fa-cube mr-2 text-gold"></i>
-                    Mr.U – Portfolio
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">ホーム</a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">プロフィール</a>
-        <a href="#portfolio" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">作品集</a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">お問い合わせ</a>
-                </div>
-                
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-toggle" class="text-gray-700 hover:text-gold focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden mt-4 pb-4 hidden">
-                <a href="#home" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">ホーム</a>
-                <a href="#about" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">プロフィール</a>
-                <a href="#portfolio" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">作品集</a>
-                <a href="#contact" class="block py-2 text-gray-700 hover:text-gold font-medium transition-colors">お問い合わせ</a>
-            </div>
-        </div>
-    </nav>
+<body class="antialiased selection:bg-yellow-200/20">
 
-    <!-- Hero Section -->
-    
-<section id="categories" class="section-dark py-16">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4">制作カテゴリー</h2>
-    <p class="text-gray-300 mb-8">それぞれの分野で独自のスタイルと技法を追求しています。</p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- 3DCG アニメーション -->
-      <article class="card-dark rounded-xl p-6">
-        <div class="flex items-start space-x-4">
-          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
-            <i class="fas fa-video text-gold text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold mb-1">3DCGアニメーション</h3>
-            <p class="text-gray-300 text-sm">キャラクターアニメーションから映像制作・VFXまで。</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- フィギュア制作 -->
-      <article class="card-dark rounded-xl p-6">
-        <div class="flex items-start space-x-4">
-          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
-            <i class="fas fa-chess-knight text-gold text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold mb-1">フィギュア制作</h3>
-            <p class="text-gray-300 text-sm">オリジナルフィギュア・スカルプティング。</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- ジュエリーデザイン -->
-      <article class="card-dark rounded-xl p-6">
-        <div class="flex items-start space-x-4">
-          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
-            <i class="fas fa-gem text-gold text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold mb-1">ジュエリーデザイン</h3>
-            <p class="text-gray-300 text-sm">アクセサリー・宝石デザイン。</p>
-          </div>
-        </div>
-      </article>
-
-      <!-- 建築ビジュアライズ -->
-      <article class="card-dark rounded-xl p-6">
-        <div class="flex items-start space-x-4">
-          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
-            <i class="fas fa-building text-gold text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold mb-1">建築ビジュアライズ</h3>
-            <p class="text-gray-300 text-sm">内外観レンダリング／ウォークスルー／マテリアル提案。</p>
-          </div>
-        </div>
-      </article>
+  <!-- Header -->
+  <header>
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <i class="fa-solid fa-cube gold"></i>
+        <span class="font-semibold">Mr.U – Portfolio</span>
+      </div>
+      <nav class="hidden md:flex items-center space-x-6 text-sm text-gray-300">
+        <a href="#about" class="hover:gold">プロフィール</a>
+        <a href="#categories" class="hover:gold">制作カテゴリー</a>
+        <a href="#tools" class="hover:gold">使用ツール</a>
+        <a href="#portfolio" class="hover:gold">作品集</a>
+        <a href="#contact" class="hover:gold">お問い合わせ</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
 
+  <!-- Hero -->
+  <section class="pt-10 pb-14">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h1 class="text-5xl md:text-7xl font-extrabold hero-title">
+        <span class="block">Mr.U</span>
+        <span class="block gold">Portfolio</span>
+      </h1>
+      <p class="text-xl md:text-2xl mt-6">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。</p>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section-dark" class="py-20 bg-gray-900 text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                <i class="fas fa-envelope mr-4 text-gold"></i>お問い合わせ
-            </h2>
-            <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
-                作品に関するご質問や制作依頼など、お気軽にお声かけください
-            </p>
-            
-            <div class="grid md:grid-cols-2 gap-8 mb-16">
-  <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="card-dark p-6 rounded-xl group transition-colors">
-    <i class="fab fa-x-twitter text-3xl text-gold mb-4"></i>
-    <h3 class="text-xl font-semibold mb-2">X（旧Twitter）</h3>
-    <p class="text-gray-300">DMまたはメンションからお問い合わせください。</p>
-  </a>
-  <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="card-dark p-6 rounded-xl group transition-colors">
-    <i class="fab fa-youtube text-3xl text-gold mb-4"></i>
-    <h3 class="text-xl font-semibold mb-2">YouTube</h3>
-    <p class="text-gray-300">チャンネルの概要欄からご連絡いただけます。</p>
-  </a>
-</div>
-<div class="flex justify-center space-x-6">
-    <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:text-gold transition-colors" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:text-gold transition-colors" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-</div>
-</section>
+      <div class="mt-8 flex justify-center space-x-6">
+        <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:gold" aria-label="X">
+          <i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="text-2xl text-gray-400 hover:gold" aria-label="YouTube">
+          <i class="fab fa-youtube"></i></a>
+      </div>
 
-    <!-- Footer -->
-    <footer class="bg-black py-8 text-center text-gray-400">
-        <div class="container mx-auto px-6">
-            <p>&copy; 2025 Mr.U – Portfolio. All rights reserved.</p>
-            <p class="mt-2 text-sm">Made with ❤️ for creative expression</p>
-        </div>
-    </footer>
-
-    <!-- Modal for Artwork Details -->
-    <div id="artwork-modal" class="fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4 hidden">
-        <div class="modal-content bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 id="modal-title" class="text-2xl font-bold text-gray-800"></h3>
-                    <button id="modal-close" class="text-gray-400 hover:text-gray-600 text-2xl">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-                <div id="modal-content">
-                    <!-- Modal content will be dynamically loaded here -->
-                </div>
-            </div>
-        </div>
+      <div class="mt-10 flex justify-center gap-4">
+        <a href="#portfolio" class="btn-primary px-5 py-3 rounded-lg">作品を見る</a>
+        <a href="#about" class="btn-outline px-5 py-3 rounded-lg">プロフィール</a>
+      </div>
     </div>
+  </section>
 
-    <!-- JavaScript -->
-    
-<!-- Inlined main.js -->
-<script>
-// Portfolio Website JavaScript
-class PortfolioApp {
-    constructor() {
-        this.currentCategory = 'all';
-        this.artworks = [];
-        this.modal = null;
-        this.init();
-    }
+  <!-- About / Specialties -->
+  <section id="about">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="card rounded-2xl p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">専門分野</h2>
+        <div class="spec-grid">
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-video gold"></i></div>
+            <div><h3 class="text-lg font-semibold">3DCGアニメーション</h3>
+              <p class="text-gray-300 text-sm">映像制作・キャラクターアニメーション</p></div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-chess-knight gold"></i></div>
+            <div><h3 class="text-lg font-semibold">フィギュア制作</h3>
+              <p class="text-gray-300 text-sm">オリジナルフィギュア・スカルプティング</p></div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-gem gold"></i></div>
+            <div><h3 class="text-lg font-semibold">ジュエリーデザイン</h3>
+              <p class="text-gray-300 text-sm">アクセサリー・宝石デザイン</p></div>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-building gold"></i></div>
+            <div><h3 class="text-lg font-semibold">建築ビジュアライズ</h3>
+              <p class="text-gray-300 text-sm">内装・外装・空間デザイン</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    async init() {
-        this.setupEventListeners();
-        this.setupSmoothScrolling();
-        this.setupNavbar();
-        await this.loadArtworks();
-        this.hideLoading();
-    }
-
-    setupEventListeners() {
-        // Mobile menu toggle
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuToggle?.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuToggle.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.className = 'fas fa-bars text-xl';
-            } else {
-                icon.className = 'fas fa-times text-xl';
-            }
-        });
-
-        // Category filter buttons
-        const categoryFilters = document.querySelectorAll('.category-filter');
-        categoryFilters.forEach(filter => {
-            filter.addEventListener('click', (e) => {
-                const category = e.currentTarget.dataset.category;
-                this.filterArtworks(category);
-                this.updateActiveFilter(e.currentTarget);
-            });
-        });
-
-        // Modal functionality
-        this.setupModal();
-
-        // Close mobile menu when clicking on navigation links
-        const navLinks = document.querySelectorAll('a[href^="#"]');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu?.classList.add('hidden');
-                const icon = mobileMenuToggle?.querySelector('i');
-                if (icon) {
-                    icon.className = 'fas fa-bars text-xl';
-                }
-            });
-        });
-    }
-
-    setupSmoothScrolling() {
-        const navLinks = document.querySelectorAll('a[href^="#"]');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    const navbarHeight = document.getElementById('navbar').offsetHeight;
-                    const targetPosition = targetSection.offsetTop - navbarHeight - 20;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    }
-
-    setupNavbar() {
-        const navbar = document.getElementById('navbar');
-        let lastScrollY = window.scrollY;
-
-        window.addEventListener('scroll', () => {
-            const currentScrollY = window.scrollY;
-            
-            if (currentScrollY > 100) {
-                navbar.classList.add('bg-white/95');
-                navbar.classList.remove('bg-white/90');
-            } else {
-                navbar.classList.remove('bg-white/95');
-                navbar.classList.add('bg-white/90');
-            }
-
-            lastScrollY = currentScrollY;
-        });
-    }
-
-    setupModal() {
-        const modal = document.getElementById('artwork-modal');
-        const closeBtn = document.getElementById('modal-close');
-        
-        closeBtn?.addEventListener('click', () => {
-            this.closeModal();
-        });
-
-        modal?.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                this.closeModal();
-            }
-        });
-
-        // ESC key to close modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
-                this.closeModal();
-            }
-        });
-    }
-
-    async loadArtworks() {
-        try {
-            // Try to fetch from API, if fails use sample data
-            const response = await fetch('tables/artworks');
-            if (response.ok) {
-                const data = await response.json();
-                this.artworks = data.data || [];
-            } else {
-                this.artworks = this.getSampleArtworks();
-            }
-        } catch (error) {
-            console.log('Using sample data');
-            this.artworks = this.getSampleArtworks();
-        }
-        
-        this.renderArtworks();
-    }
-
-    getSampleArtworks() {
-        return [
-            {
-                id: 1,
-                title: "サイバーパンクキャラクター",
-                category: "animation",
-                description: "未来都市を駆け抜けるサイバネティックキャラクターのアニメーション作品。リアルタイムレンダリングと高度なシェーディング技術を使用。",
-                image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop",
-                tags: ["Blender", "アニメーション", "キャラクター", "サイバーパンク"],
-                year: 2024,
-                duration: "3分30秒",
-                software: "Blender, Substance Painter",
-                video_url: "https://example.com/video1.mp4"
-            },
-            {
-                id: 2,
-                title: "ドラゴンフィギュア",
-                category: "figure",
-                description: "神話の世界から飛び出したような迫力あるドラゴンフィギュア。細部まで丁寧にスカルプトし、リアルな質感を追求しました。",
-                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
-                tags: ["ZBrush", "スカルプト", "ファンタジー", "ドラゴン"],
-                year: 2024,
-                size: "高さ25cm",
-                material: "PLA樹脂",
-                techniques: "3Dプリント, 手塗り仕上げ"
-            },
-            {
-                id: 3,
-                title: "エレガントリング",
-                category: "jewelry",
-                description: "シンプルながらも上品な輝きを放つプラチナリング。幾何学的なデザインが特徴的な現代的なジュエリー。",
-                image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=800&h=600&fit=crop",
-                tags: ["Rhinoceros", "ジュエリー", "プラチナ", "モダン"],
-                year: 2024,
-                material: "プラチナ950",
-                size: "リングサイズ10-20対応",
-                weight: "約5g"
-            },
-            {
-                id: 4,
-                title: "森の精霊アニメーション",
-                category: "animation",
-                description: "幻想的な森の中で踊る精霊たちのショートアニメーション。自然の美しさとマジカルな世界観を表現。",
-                image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop",
-                tags: ["Maya", "エフェクト", "ファンタジー", "自然"],
-                year: 2023,
-                duration: "2分15秒",
-                software: "Maya, After Effects",
-                video_url: "https://example.com/video2.mp4"
-            },
-            {
-                id: 5,
-                title: "戦士フィギュア",
-                category: "figure",
-                description: "中世の騎士をイメージした戦士フィギュア。武器や防具の細部まで丁寧に造形し、迫力ある立ち姿を再現。",
-                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
-                tags: ["ZBrush", "キャラクター", "中世", "戦士"],
-                year: 2023,
-                size: "高さ30cm",
-                material: "レジン",
-                techniques: "3Dプリント, アクリル塗装"
-            },
-            {
-                id: 6,
-                title: "スタンダードネックレス",
-                category: "jewelry",
-                description: "日常使いからフォーマルまで幅広く対応できるシンプルなデザインのネックレス。上質な素材を使用。",
-                image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800&h=600&fit=crop",
-                tags: ["デザイン", "ネックレス", "シルバー", "シンプル"],
-                year: 2023,
-                material: "シルバー925",
-                length: "40-45cm調整可能",
-                weight: "約8g"
-            },
-            {
-                id: 7,
-                title: "モダンリビングルーム",
-                category: "architecture",
-                description: "モダンなリビングルームの内装ビジュアライズ。自然光を活かした明るく開放的な空間で、ミニマルな家具と暖かい材質のコンビネーションが特徴です。",
-                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
-                tags: ["Blender", "内装デザイン", "モダン", "ミニマル", "ナチュラルライト"],
-                year: 2024,
-                software: "Blender, Photoshop, After Effects",
-                room_type: "リビングルーム",
-                lighting_style: "ナチュラルライト",
-                rendering_engine: "Cycles"
-            },
-            {
-                id: 8,
-                title: "ラグジュアリーキッチン",
-                category: "architecture",
-                description: "ラグジュアリーなキッチンインテリアの3Dビジュアライズ。高級感ある大理石と木材の組み合わせ、間接照明が作り出す温かみのある空間です。",
-                image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop",
-                tags: ["キッチンデザイン", "ラグジュアリー", "大理石", "木材", "ライティング"],
-                year: 2024,
-                software: "Blender, Substance Painter, Photoshop",
-                room_type: "キッチン",
-                lighting_style: "アンビエント",
-                rendering_engine: "Cycles"
-            }
-        ];
-    }
-
-    renderArtworks() {
-        const grid = document.getElementById('portfolio-grid');
-        const emptyState = document.getElementById('empty-state');
-        
-        if (!grid) return;
-
-        const filteredArtworks = this.currentCategory === 'all' 
-            ? this.artworks 
-            : this.artworks.filter(artwork => artwork.category === this.currentCategory);
-
-        if (filteredArtworks.length === 0) {
-            grid.classList.add('hidden');
-            emptyState?.classList.remove('hidden');
-            return;
-        }
-
-        emptyState?.classList.add('hidden');
-        grid.classList.remove('hidden');
-
-        grid.innerHTML = filteredArtworks.map(artwork => `
-            <div class="artwork-item bg-white rounded-2xl shadow-lg overflow-hidden group" data-id="${artwork.id}">
-                <div class="aspect-video bg-gray-200 overflow-hidden relative">
-                    <img src="${artwork.image}" 
-                         alt="${artwork.title}" 
-                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                        <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
-                    </div>
-                </div>
-                
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="category-badge ${this.getCategoryBadgeClass(artwork.category)} px-3 py-1 rounded-full text-sm font-medium">
-                            ${this.getCategoryIcon(artwork.category)} ${this.getCategoryName(artwork.category)}
-                        </span>
-                        <span class="text-gray-500 text-sm">${artwork.year}</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold text-gray-800 mb-2 group-hover:text-purple-600 transition-colors">
-                        ${artwork.title}
-                    </h3>
-                    
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                        ${artwork.description}
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        ${artwork.tags.slice(0, 3).map(tag => `
-                            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
-                                ${tag}
-                            </span>
-                        `).join('')}
-                        ${artwork.tags.length > 3 ? `
-                            <span class="text-gray-500 text-xs self-center">
-                                +${artwork.tags.length - 3}個
-                            </span>
-                        ` : ''}
-                    </div>
-                    
-                    <button class="w-full bg-gray-900 text-white py-3 rounded-lg hover:bg-purple-600 transition-colors font-medium">
-                        <i class="fas fa-eye mr-2"></i>詳細を見る
-                    </button>
-                </div>
-            </div>
-        `).join('');
-
-        // Add click event listeners to artwork items
-        const artworkItems = grid.querySelectorAll('.artwork-item');
-        artworkItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const artworkId = parseInt(item.dataset.id);
-                this.openModal(artworkId);
-            });
-        });
-    }
-
-    getCategoryBadgeClass(category) {
-        const classes = {
-            animation: 'bg-purple-100 text-purple-800',
-            figure: 'bg-blue-100 text-blue-800', 
-            jewelry: 'bg-yellow-100 text-yellow-800',
-            architecture: 'bg-green-100 text-green-800'
-        };
-        return classes[category] || 'bg-gray-100 text-gray-800';
-    }
-
-    getCategoryIcon(category) {
-        const icons = {
-            animation: '<i class="fas fa-video mr-1"></i>',
-            figure: '<i class="fas fa-chess-knight mr-1"></i>',
-            jewelry: '<i class="fas fa-gem mr-1"></i>',
-            architecture: '<i class="fas fa-building mr-1"></i>'
-        };
-        return icons[category] || '<i class="fas fa-image mr-1"></i>';
-    }
-
-    getCategoryName(category) {
-        const names = {
-            animation: '3DCGアニメーション',
-            figure: 'フィギュア',
-            jewelry: 'ジュエリー',
-            architecture: '建築ビジュアライズ'
-        };
-        return names[category] || 'その他';
-    }
-
-    filterArtworks(category) {
-        this.currentCategory = category;
-        this.renderArtworks();
-    }
-
-    updateActiveFilter(activeButton) {
-        // Remove active class from all filter buttons
-        document.querySelectorAll('.category-filter').forEach(btn => {
-            btn.classList.remove('active');
-            btn.classList.add('bg-white', 'text-gray-700', 'hover:bg-gray-100');
-        });
-
-        // Add active class to clicked button
-        activeButton.classList.add('active');
-        activeButton.classList.remove('bg-white', 'text-gray-700', 'hover:bg-gray-100');
-    }
-
-    openModal(artworkId) {
-        const artwork = this.artworks.find(a => a.id === artworkId);
-        if (!artwork) return;
-
-        const modal = document.getElementById('artwork-modal');
-        const modalTitle = document.getElementById('modal-title');
-        const modalContent = document.getElementById('modal-content');
-
-        if (!modal || !modalTitle || !modalContent) return;
-
-        modalTitle.textContent = artwork.title;
-        modalContent.innerHTML = this.generateModalContent(artwork);
-
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-
-        // Setup video if exists
-        if (artwork.video_url) {
-            this.setupVideoPlayer(artwork.video_url);
-        }
-    }
-
-    generateModalContent(artwork) {
-        return `
-            <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                    <img src="${artwork.image}" 
-                         alt="${artwork.title}" 
-                         class="w-full rounded-lg shadow-lg">
-                    
-                    ${artwork.video_url ? `
-                        <div class="mt-4">
-                            <video controls class="w-full rounded-lg" poster="${artwork.image}">
-                                <source src="${artwork.video_url}" type="video/mp4">
-                                お使いのブラウザは動画再生をサポートしていません。
-                            </video>
-                        </div>
-                    ` : ''}
-                </div>
-                
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="category-badge ${this.getCategoryBadgeClass(artwork.category)} px-4 py-2 rounded-full font-medium">
-                            ${this.getCategoryIcon(artwork.category)} ${this.getCategoryName(artwork.category)}
-                        </span>
-                        <span class="text-gray-500">${artwork.year}</span>
-                    </div>
-                    
-                    <p class="text-gray-700 mb-6 leading-relaxed">
-                        ${artwork.description}
-                    </p>
-                    
-                    <div class="space-y-4">
-                        ${this.generateArtworkDetails(artwork)}
-                    </div>
-                    
-                    <div class="mt-6">
-                        <h4 class="font-semibold text-gray-800 mb-3">タグ</h4>
-                        <div class="flex flex-wrap gap-2">
-                            ${artwork.tags.map(tag => `
-                                <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">
-                                    ${tag}
-                                </span>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
-
-    generateArtworkDetails(artwork) {
-        const details = [];
-
-        if (artwork.duration) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-clock text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">再生時間</span>
-                        <p class="font-medium text-gray-800">${artwork.duration}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.software) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-tools text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">使用ソフト</span>
-                        <p class="font-medium text-gray-800">${artwork.software}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.size) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-ruler text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">サイズ</span>
-                        <p class="font-medium text-gray-800">${artwork.size}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.material) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-cube text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">素材</span>
-                        <p class="font-medium text-gray-800">${artwork.material}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.weight) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-weight text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">重量</span>
-                        <p class="font-medium text-gray-800">${artwork.weight}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.techniques) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-magic text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">技法</span>
-                        <p class="font-medium text-gray-800">${artwork.techniques}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.length) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-link text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">長さ</span>
-                        <p class="font-medium text-gray-800">${artwork.length}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        // 建築ビジュアライズ専用フィールド
-        if (artwork.room_type) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-home text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">部屋タイプ</span>
-                        <p class="font-medium text-gray-800">${artwork.room_type}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.lighting_style) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-lightbulb text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">ライティングスタイル</span>
-                        <p class="font-medium text-gray-800">${artwork.lighting_style}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        if (artwork.rendering_engine) {
-            details.push(`
-                <div class="flex items-center">
-                    <i class="fas fa-cog text-gray-400 mr-3"></i>
-                    <div>
-                        <span class="text-sm text-gray-500">レンダリングエンジン</span>
-                        <p class="font-medium text-gray-800">${artwork.rendering_engine}</p>
-                    </div>
-                </div>
-            `);
-        }
-
-        return details.join('');
-    }
-
-    setupVideoPlayer(videoUrl) {
-        // Video player setup can be enhanced here
-        // For now, using basic HTML5 video controls
-    }
-
-    closeModal() {
-        const modal = document.getElementById('artwork-modal');
-        modal?.classList.add('hidden');
-        document.body.style.overflow = '';
-    }
-
-    hideLoading() {
-        const loadingState = document.getElementById('loading-state');
-        loadingState?.classList.add('hidden');
-        
-        const portfolioGrid = document.getElementById('portfolio-grid');
-        portfolioGrid?.classList.remove('hidden');
-    }
-}
-
-// Initialize the portfolio app when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new PortfolioApp();
-});
-
-// Add CSS for line-clamp utility
-const style = document.createElement('style');
-style.textContent = `
-    .line-clamp-3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-`;
-document.head.appendChild(style);
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Remove '主な使用ソフト' line in hero if still present.
-  const hero = document.querySelector('section, header + section');
-  if (hero) {
-    const spans = hero.querySelectorAll('span, p');
-    for (const el of spans) {
-      if (/主な使用ソフト/.test(el.textContent || '')) {
-        el.remove();
-      }
-    }
-  }
-
-  // Normalize specialties spacing (専門分野)
-  const about = document.querySelector('#about');
-  if (about) {
-    // find grid container after "専門分野" heading
-    const title = Array.from(about.querySelectorAll('h2,h3')).find(h=>/専門分野/.test(h.textContent||''));
-    let grid = null;
-    if (title) {
-      let cur = title.nextElementSibling;
-      while (cur && !/grid/.test(cur.className||'') && cur!==about){ cur = cur.nextElementSibling; }
-      grid = cur || about.querySelector('.grid');
-    }
-    if (grid) grid.classList.add('uniform-specialties');
-  }
-
-  // Fix "制作カテゴリー": replace any buggy slider with stable cards
-  function findSectionByH2(rx) {
-    const secs = Array.from(document.querySelectorAll('section'));
-    for (const s of secs) {
-      const h2 = s.querySelector('h2,h3');
-      if (h2 && rx.test(h2.textContent.replace(/\s/g,''))) return s;
-    }
-    return null;
-  }
-  const cat = findSectionByH2(/制作カテゴリー/);
-  if (cat) {
-    cat.id = 'categories';
-    cat.classList.add('v7-stable');
-    const wrap = document.createElement('div');
-    wrap.className = 'max-w-6xl mx-auto px-6';
-    wrap.innerHTML = `
+  <!-- Categories (stable grid, no slider bug) -->
+  <section id="categories">
+    <div class="max-w-6xl mx-auto px-6">
       <h2 class="text-3xl md:text-4xl font-bold mb-3">制作カテゴリー</h2>
       <p class="text-gray-300 mb-6">それぞれの分野で独自のスタイルと技法を追求しています。</p>
-      <div class="grid">
-        ${[
-          {icon:'fa-video', title:'3DCGアニメーション', desc:'キャラクターアニメーションから映像制作・VFXまで。'},
-          {icon:'fa-chess-knight', title:'フィギュア制作', desc:'オリジナルフィギュア・スカルプティング。'},
-          {icon:'fa-gem', title:'ジュエリーデザイン', desc:'アクセサリー・宝石デザイン。'},
-          {icon:'fa-building', title:'建築ビジュアライズ', desc:'内外観レンダリング／ウォークスルー／マテリアル提案。'}
-        ].map(c => `
-          <article class="card-dark rounded-xl p-6">
-            <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
-                <i class="fas ${c.icon} text-[color:var(--mru-gold)] text-xl"></i>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold mb-1">${c.title}</h3>
-                <p class="text-gray-300 text-sm">${c.desc}</p>
-              </div>
+      <div class="cat-grid">
+        <article class="card rounded-xl p-6">
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-video gold"></i></div>
+            <div><h3 class="text-xl font-semibold mb-1">3DCGアニメーション</h3>
+              <p class="text-gray-300 text-sm">キャラクターアニメーションから映像制作・VFXまで。</p></div>
+          </div>
+        </article>
+        <article class="card rounded-xl p-6">
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-chess-knight gold"></i></div>
+            <div><h3 class="text-xl font-semibold mb-1">フィギュア制作</h3>
+              <p class="text-gray-300 text-sm">オリジナルフィギュア・スカルプティング。</p></div>
+          </div>
+        </article>
+        <article class="card rounded-xl p-6">
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-gem gold"></i></div>
+            <div><h3 class="text-xl font-semibold mb-1">ジュエリーデザイン</h3>
+              <p class="text-gray-300 text-sm">アクセサリー・宝石デザイン。</p></div>
+          </div>
+        </article>
+        <article class="card rounded-xl p-6">
+          <div class="flex items-start space-x-4">
+            <div class="iconbox" aria-hidden="true"><i class="fas fa-building gold"></i></div>
+            <div><h3 class="text-xl font-semibold mb-1">建築ビジュアライズ</h3>
+              <p class="text-gray-300 text-sm">内外観レンダリング／ウォークスルー／マテリアル提案。</p></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section id="tools">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">使用ツール</h2>
+      <p class="text-gray-300 mb-6">主に以下のソフトウェア・ツールを使用しています。</p>
+      <div class="u-grid u-grid-3">
+        
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-cube gold"></i>
+            <h3 class="font-semibold">Blender</h3>
+          </div>
+          <p class="text-gray-300 text-sm">3Dモデリング・アニメーション</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-drafting-compass gold"></i>
+            <h3 class="font-semibold">ZBrush</h3>
+          </div>
+          <p class="text-gray-300 text-sm">デジタルスカルプティング</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-shapes gold"></i>
+            <h3 class="font-semibold">Rhinoceros</h3>
+          </div>
+          <p class="text-gray-300 text-sm">3D CAD・プロダクトデザイン</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-wand-magic-sparkles gold"></i>
+            <h3 class="font-semibold">After Effects</h3>
+          </div>
+          <p class="text-gray-300 text-sm">モーショングラフィックス・VFX</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-film gold"></i>
+            <h3 class="font-semibold">Premiere Pro</h3>
+          </div>
+          <p class="text-gray-300 text-sm">動画編集</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-music gold"></i>
+            <h3 class="font-semibold">FL Studio</h3>
+          </div>
+          <p class="text-gray-300 text-sm">音楽制作</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-image gold"></i>
+            <h3 class="font-semibold">Photoshop</h3>
+          </div>
+          <p class="text-gray-300 text-sm">画像編集・レタッチ</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-pen-nib gold"></i>
+            <h3 class="font-semibold">Illustrator</h3>
+          </div>
+          <p class="text-gray-300 text-sm">ベクターグラフィック</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-paintbrush gold"></i>
+            <h3 class="font-semibold">Substance 3D Painter</h3>
+          </div>
+          <p class="text-gray-300 text-sm">3Dテクスチャリング</p>
+        </div>
+        <div class="card rounded-xl p-5">
+          <div class="flex items-center space-x-3 mb-2">
+            <i class="fa-solid fa-person-running gold"></i>
+            <h3 class="font-semibold">Cascadeur</h3>
+          </div>
+          <p class="text-gray-300 text-sm">物理ベースアニメ</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio (建築は一カード扱い) -->
+  <section id="portfolio">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">作品集</h2>
+      <p class="text-gray-300 mb-6">一部抜粋。動画や静止画は順次追加します。</p>
+      <div class="u-grid u-grid-3">
+        <article class="card rounded-xl overflow-hidden">
+          <div class="aspect-video bg-black/40 flex items-center justify-center">
+            <i class="fas fa-building gold text-3xl"></i>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">建築ビジュアライズ</h3>
+            <p class="text-gray-300 text-sm mt-1">外観/内観レンダリング、ウォークスルー等</p>
+          </div>
+        </article>
+        <article class="card rounded-xl overflow-hidden">
+          <div class="aspect-video bg-black/40 flex items-center justify-center">
+            <i class="fas fa-person-running gold text-3xl"></i>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">キャラクターアニメーション</h3>
+            <p class="text-gray-300 text-sm mt-1">動きと演出の実験</p>
+          </div>
+        </article>
+        <article class="card rounded-xl overflow-hidden">
+          <div class="aspect-video bg-black/40 flex items-center justify-center">
+            <i class="fas fa-gem gold text-3xl"></i>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-semibold">ジュエリーデザイン</h3>
+            <p class="text-gray-300 text-sm mt-1">宝石・アクセサリー案</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">お問い合わせ</h2>
+      <p class="text-gray-300 mb-6">作品に関するご質問や制作依頼など、お気軽にお声かけください</p>
+      <div class="u-grid">
+        <a href="https://x.com/nlimited_u_?s=21" target="_blank" rel="noopener" class="card rounded-xl p-6 block">
+          <div class="flex items-center space-x-3">
+            <i class="fab fa-x-twitter text-2xl gold"></i>
+            <div>
+              <h3 class="text-xl font-semibold">X（旧Twitter）</h3>
+              <p class="text-gray-300 text-sm">DMまたはメンションからお問い合わせください。</p>
             </div>
-          </article>
-        `).join('')}
-      </div>`;
-    // Replace inner content only, keeping section outer paddings from theme
-    cat.innerHTML = '';
-    cat.appendChild(wrap);
-  }
-});
-</script>
+          </div>
+        </a>
+        <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" rel="noopener" class="card rounded-xl p-6 block">
+          <div class="flex items-center space-x-3">
+            <i class="fab fa-youtube text-2xl gold"></i>
+            <div>
+              <h3 class="text-xl font-semibold">YouTube</h3>
+              <p class="text-gray-300 text-sm">チャンネルの概要欄からご連絡いただけます。</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-sm text-gray-400 border-t border-[color:var(--line)]">
+    &copy; 2025 Mr.U – Portfolio. All rights reserved.
+  </footer>
 
 </body>
 </html>
