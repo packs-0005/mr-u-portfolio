@@ -123,7 +123,8 @@ header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filte
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">ホーム</a>
                     <a href="#about" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">プロフィール</a>
-                    <a href="#portfolio" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">作品集</a>
+                    <a href="#archviz" class="nav-link mr-4">建築ビジュアライズ</a>
+        <a href="#portfolio" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">作品集</a>
                     <a href="#contact" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">お問い合わせ</a>
                 </div>
                 
@@ -290,7 +291,61 @@ header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filte
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="section-dark" class="py-20 bg-gray-50">
+    
+<!-- ===== ArchViz Section (explicit) ===== -->
+<section id="archviz" class="section-dark py-16">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">建築ビジュアライズ</h2>
+    <p class="text-gray-300 mb-8">
+      住宅・商業施設・インテリアの可視化。リアルタイム検討から最終レンダー、
+      カメラワークを用いたウォークスルーまで対応します。
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+      <div class="card-dark p-5 rounded-xl">
+        <div class="flex items-center mb-3 space-x-3">
+          <i class="fas fa-city text-gold text-xl"></i>
+          <h3 class="text-lg font-semibold">外観レンダリング</h3>
+        </div>
+        <p class="text-gray-300 text-sm">昼夜・季節差分／ランドスケープ／マス模型からの提案。</p>
+      </div>
+      <div class="card-dark p-5 rounded-xl">
+        <div class="flex items-center mb-3 space-x-3">
+          <i class="fas fa-couch text-gold text-xl"></i>
+          <h3 class="text-lg font-semibold">内観・マテリアル</h3>
+        </div>
+        <p class="text-gray-300 text-sm">質感設定／照明演出／カラースキーム検討。</p>
+      </div>
+      <div class="card-dark p-5 rounded-xl">
+        <div class="flex items-center mb-3 space-x-3">
+          <i class="fas fa-video text-gold text-xl"></i>
+          <h3 class="text-lg font-semibold">アニメーション</h3>
+        </div>
+        <p class="text-gray-300 text-sm">ウォークスルー／ターンテーブル／演出編集。</p>
+      </div>
+    </div>
+
+    <!-- Embed placeholder: YouTube URLをいただいたら差し替えます -->
+    <div class="relative w-full rounded-xl overflow-hidden border border-gold" style="max-width: 960px; margin: 0 auto;">
+      <div class="relative" style="padding-top:56.25%;">
+        <iframe
+          class="absolute inset-0 w-full h-full"
+          src="about:blank"
+          title="ArchViz Reel (準備中)"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#contact" class="inline-block btn-ghost px-5 py-3 rounded-lg">依頼・相談はこちら</a>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="section-dark" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
