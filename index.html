@@ -81,7 +81,13 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-    </style>
+    
+/* ==== layout fixes ==== */
+#about .specialty-grid{grid-template-columns:1fr;gap:1.25rem}
+@media(min-width:768px){#about .specialty-grid{grid-template-columns:1fr 1fr;gap:1.5rem}}
+#about .specialty-grid>*{margin:0!important}
+
+</style>
 
 <style>
 :root{--bg:#0b0b0c;--fg:#f5f7fb;--muted:#aab1ba;--gold:#D4AF37}
@@ -146,303 +152,68 @@ header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filte
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center text-white relative overflow-hidden">
-        <div class="absolute inset-0 bg-black opacity-20"></div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="animate-fade-in">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight"><span class="block">Mr.U</span><span class="block hero-gold">Portfolio</span></h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。</p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#portfolio" class="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
-                        <i class="fas fa-images mr-2"></i>作品を見る
-                    </a>
-                    <a href="#about" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-all transform hover:scale-105">
-                        <i class="fas fa-user mr-2"></i>プロフィール
-                    </a>
-                </div>
-            </div>
+    
+<section id="categories" class="section-dark py-16">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">制作カテゴリー</h2>
+    <p class="text-gray-300 mb-8">それぞれの分野で独自のスタイルと技法を追求しています。</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- 3DCG アニメーション -->
+      <article class="card-dark rounded-xl p-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
+            <i class="fas fa-video text-gold text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-1">3DCGアニメーション</h3>
+            <p class="text-gray-300 text-sm">キャラクターアニメーションから映像制作・VFXまで。</p>
+          </div>
         </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 text-6xl opacity-10 animate-pulse">
-            <i class="fas fa-cube"></i>
+      </article>
+
+      <!-- フィギュア制作 -->
+      <article class="card-dark rounded-xl p-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
+            <i class="fas fa-chess-knight text-gold text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-1">フィギュア制作</h3>
+            <p class="text-gray-300 text-sm">オリジナルフィギュア・スカルプティング。</p>
+          </div>
         </div>
-        <div class="absolute bottom-20 right-10 text-4xl opacity-10 animate-pulse" style="animation-delay: 0.5s;">
-            <i class="fas fa-gem"></i>
+      </article>
+
+      <!-- ジュエリーデザイン -->
+      <article class="card-dark rounded-xl p-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
+            <i class="fas fa-gem text-gold text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-1">ジュエリーデザイン</h3>
+            <p class="text-gray-300 text-sm">アクセサリー・宝石デザイン。</p>
+          </div>
         </div>
-    </section>
+      </article>
 
-    <!-- About Section -->
-    <section id="about" class="section-dark" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-                    <i class="fas fa-user-circle mr-4 text-gold"></i>プロフィール
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    創造性と技術を融合させ、独創的な作品を生み出すクリエイター
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div class="bg-gradient-to-br from-purple-100 to-blue-100 p-8 rounded-2xl">
-                        <h3 class="text-2xl font-bold mb-6 text-gray-800">専門分野</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-video text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">3DCGアニメーション</h4>
-                                    <p class="text-gray-600 text-sm">映像制作・キャラクターアニメーション</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-chess-knight text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">フィギュア制作</h4>
-                                    <p class="text-gray-600 text-sm">オリジナルフィギュア・スカルプティング</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-gem text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">ジュエリーデザイン</h4>
-                                    <p class="text-gray-600 text-sm">アクセサリー・宝石デザイン</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-building text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">建築ビジュアライズ</h4>
-                                    <p class="text-gray-600 text-sm">内装・外装・空間デザイン</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="space-y-6">
-                        <div class="bg-gray-50 p-6 rounded-xl">
-                            <h4 class="font-semibold text-gray-800 mb-3">
-                                <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>クリエイティブビジョン
-                            </h4>
-                            <p class="text-gray-600 leading-relaxed">
-                                技術と芸術性を融合させ、見る人の心に響く作品作りを目指しています。
-                                細部へのこだわりと革新的なアプローチを大切にしています。
-                            </p>
-                        </div>
-                        <div class="bg-gray-50 p-6 rounded-xl">
-                            <h4 class="font-semibold text-gray-800 mb-3">
-                                <i class="fas fa-tools text-blue-500 mr-2"></i>使用ツール
-                            </h4>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                <div class="bg-orange-100 text-orange-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-cube mr-1"></i>Blender
-                                    <div class="text-xs text-orange-600 mt-1">3Dモデリング・アニメーション</div>
-                                </div>
-                                <div class="bg-purple-100 text-purple-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-hammer mr-1"></i>ZBrush
-                                    <div class="text-xs text-gold mt-1">デジタルスカルプティング</div>
-                                </div>
-                                <div class="bg-yellow-100 text-yellow-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-drafting-compass mr-1"></i>Rhinoceros
-                                    <div class="text-xs text-yellow-600 mt-1">3D CAD・プロダクトデザイン</div>
-                                </div>
-                                <div class="bg-blue-100 text-blue-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-magic mr-1"></i>After Effects
-                                    <div class="text-xs text-blue-600 mt-1">モーショングラフィックス・VFX</div>
-                                </div>
-                                <div class="bg-red-100 text-red-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-film mr-1"></i>Premiere Pro
-                                    <div class="text-xs text-red-600 mt-1">動画編集</div>
-                                </div>
-                                <div class="bg-pink-100 text-pink-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-music mr-1"></i>FL Studio
-                                    <div class="text-xs text-pink-600 mt-1">音楽制作</div>
-                                </div>
-                                <div class="bg-cyan-100 text-cyan-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-image mr-1"></i>Photoshop
-                                    <div class="text-xs text-cyan-600 mt-1">画像編集・レタッチ</div>
-                                </div>
-                                <div class="bg-indigo-100 text-indigo-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-vector-square mr-1"></i>Illustrator
-                                    <div class="text-xs text-indigo-600 mt-1">ベクターグラフィック</div>
-                                </div>
-                                <div class="bg-emerald-100 text-emerald-800 px-3 py-2 rounded-lg text-sm font-medium text-center">
-                                    <i class="fas fa-paint-brush mr-1"></i>Substance 3D
-                                    <div class="text-xs text-emerald-600 mt-1">3Dテクスチャリング</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-
-<section id="portfolio" class="section-dark" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
-                    <i class="fas fa-images mr-4 text-gold"></i>作品集
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                    多様なジャンルの創作活動から生まれた作品をご覧ください
-                </p>
-                
-                <!-- Category Filter -->
-                <div class="flex flex-wrap justify-center gap-4 mb-12">
-                    <button class="category-filter active px-6 py-3 rounded-full font-semibold transition-all duration-300" data-category="all">
-                        <i class="fas fa-th mr-2"></i>すべて
-                    </button>
-                    <button class="category-filter px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-gray-100 transition-all duration-300" data-category="animation">
-                        <i class="fas fa-video mr-2"></i>3DCGアニメーション
-                    </button>
-                    <button class="category-filter px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-gray-100 transition-all duration-300" data-category="figure">
-                        <i class="fas fa-chess-knight mr-2"></i>フィギュア
-                    </button>
-                    <button class="category-filter px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-gray-100 transition-all duration-300" data-category="jewelry">
-                        <i class="fas fa-gem mr-2"></i>ジュエリー
-                    </button>
-                    <button class="category-filter px-6 py-3 rounded-full font-semibold bg-white text-gray-700 hover:bg-gray-100 transition-all duration-300" data-category="architecture">
-                        <i class="fas fa-building mr-2"></i>建築ビジュアライズ
-                    </button>
-                </div>
-            </div>
-
-            <!-- Loading State -->
-            <div id="loading-state" class="text-center py-16">
-                <div class="loading-spinner mx-auto mb-4"></div>
-                <p class="text-gray-600">作品を読み込み中...</p>
-            </div>
-
-            <!-- Portfolio Grid -->
-            <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
-                <!-- Portfolio items will be dynamically loaded here -->
-            </div>
-
-            <!-- Empty State -->
-            <div id="empty-state" class="text-center py-16 hidden">
-                <i class="fas fa-folder-open text-6xl text-gray-300 mb-4"></i>
-                <h3 class="text-xl font-semibold text-gray-600 mb-2">作品がありません</h3>
-                <p class="text-gray-500">選択したカテゴリーに作品がまだ登録されていません。</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Category Overview -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold mb-6 text-gray-800">制作カテゴリー</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    それぞれの分野で独自のスタイルと技法を追求しています
-                </p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- 3DCG Animation -->
-                <div class="category-card bg-gradient-to-br from-purple-500 to-blue-600 p-8 rounded-2xl text-white text-center">
-                    <div class="text-6xl mb-6">
-                        <i class="fas fa-video"></i>
-                    
-    <div class="card-dark p-5 rounded-xl flex items-center space-x-4">
-      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
-        <i class="fas fa-building text-gold text-xl"></i>
-      
-      <!-- ArchViz as a portfolio card -->
-      <article class="card-dark rounded-xl overflow-hidden border border-gold">
-        <div class="aspect-video bg-black/40 flex items-center justify-center">
-          <i class="fas fa-building text-gold text-3xl"></i>
-        </div>
-        <div class="p-4">
-          <h3 class="text-lg font-semibold">建築ビジュアライズ</h3>
-          <p class="text-gray-300 text-sm mt-1">外観/内観レンダリング、ウォークスルー等</p>
+      <!-- 建築ビジュアライズ -->
+      <article class="card-dark rounded-xl p-6">
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
+            <i class="fas fa-building text-gold text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-1">建築ビジュアライズ</h3>
+            <p class="text-gray-300 text-sm">内外観レンダリング／ウォークスルー／マテリアル提案。</p>
+          </div>
         </div>
       </article>
     </div>
-      <div>
-        <h3 class="text-lg font-semibold mb-1">建築ビジュアライズ</h3>
-        <p class="text-gray-300 text-sm">内外観レンダリング / ウォークスルー / マテリアル提案</p>
-      </div>
-    </div>
-    </div>
-                    <h3 class="text-2xl font-bold mb-4">3DCGアニメーション</h3>
-                    <p class="text-purple-100 mb-6 leading-relaxed">
-                        キャラクターアニメーションから映像制作まで、
-                        動きのある表現で物語を紡ぎます。
-                    </p>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">キャラクター</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">モーション</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">VFX</span>
-                    </div>
-                </div>
-                
-                <!-- Figure -->
-                <div class="category-card bg-gradient-to-br from-blue-500 to-teal-600 p-8 rounded-2xl text-white text-center">
-                    <div class="text-6xl mb-6">
-                        <i class="fas fa-chess-knight"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">フィギュア制作</h3>
-                    <p class="text-blue-100 mb-6 leading-relaxed">
-                        オリジナルキャラクターから既存作品まで、
-                        立体造形の魅力を追求します。
-                    </p>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">スカルプト</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">ペイント</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">ディテール</span>
-                    </div>
-                </div>
-                
-                <!-- Jewelry -->
-                <div class="category-card bg-gradient-to-br from-yellow-500 to-orange-600 p-8 rounded-2xl text-white text-center">
-                    <div class="text-6xl mb-6">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">ジュエリーデザイン</h3>
-                    <p class="text-yellow-100 mb-6 leading-relaxed">
-                        美しいフォルムと機能性を兼ね備えた
-                        アクセサリーをデザインします。
-                    </p>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">リング</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">ネックレス</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">カスタム</span>
-                    </div>
-                </div>
-                
-                <!-- Architecture -->
-                <div class="category-card bg-gradient-to-br from-green-500 to-emerald-600 p-8 rounded-2xl text-white text-center">
-                    <div class="text-6xl mb-6">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">建築ビジュアライズ</h3>
-                    <p class="text-green-100 mb-6 leading-relaxed">
-                        内装・外装空間の美しさを
-                        フォトリアルな映像で表現します。
-                    </p>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">内装デザイン</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">ライティング</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">レンダリング</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  </div>
+</section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="section-dark" class="py-20 bg-gray-900 text-white">
