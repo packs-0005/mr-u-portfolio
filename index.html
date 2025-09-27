@@ -94,7 +94,7 @@
         <a href="#profile" class="text-sm hover:text-gold">プロフィール</a>
         <a href="#contact" class="text-sm hover:text-gold">お問い合わせ</a>
       </div>
-      <button class="md:hidden text-xl"><i class="fas fa-bars"></i></button>
+      <!-- Removed unused hamburger menu on mobile since it had no function -->
     </nav>
   </header>
 
@@ -102,9 +102,9 @@
   <section id="top" class="relative w-full flex flex-col justify-center items-center text-center pt-32 pb-12 px-6" style="background-image:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.9));">
     <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Mr.U<br><span class="text-gold">Portfolio</span></h1>
     <p class="max-w-2xl text-center mb-6 leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。</p>
-    <div class="flex justify-center gap-4 mb-4">
-      <a href="https://x.com/nlimited_u_?s=21" target="_blank" class="text-2xl hover:text-gold"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" class="text-2xl hover:text-gold"><i class="fab fa-youtube"></i></a>
+    <div class="flex justify-center gap-6 mb-4 text-3xl">
+      <a href="https://x.com/nlimited_u_?s=21" target="_blank" class="hover:text-gold"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" class="hover:text-gold"><i class="fab fa-youtube"></i></a>
     </div>
     <div class="flex flex-col sm:flex-row gap-3 justify-center">
       <a href="#portfolio" class="btn btn-primary">作品を見る</a>
@@ -118,6 +118,11 @@
       <h2 class="section-title">プロフィール</h2>
       <p class="mb-4">3DCG・造形・映像・音楽を横断する <span class="px-2 py-1 rounded-full border border-gold text-gold">"マルチクリエイター"</span>。</p>
       <p class="mb-6">設計思考で構図・動き・音を統合し、体験としての“作品”をデザインします。</p>
+      <!-- Profile image -->
+      <div class="flex justify-center mt-6 mb-6">
+        <img src="assets/profile.jpg" alt="プロフィール写真" class="rounded-full border-2 border-gold object-cover" style="max-width: 220px; width:100%; height:auto;">
+      </div>
+
       <ul class="space-y-3 mb-6">
         <li class="flex gap-2"><i class="fas fa-check text-gold pt-1"></i>造形からアニメーション、編集、BGM制作まで一気通貫</li>
         <li class="flex gap-2"><i class="fas fa-check text-gold pt-1"></i>設計思考と大胆な演出で、機能と美を両立</li>
@@ -279,7 +284,7 @@
     <div class="grid sm:grid-cols-2 gap-6">
       <div class="card flex flex-col gap-2">
         <div class="flex items-center gap-2">
-          <i class="fas fa-x-twitter text-xl" style="color:var(--gold)"></i>
+          <i class="fab fa-x-twitter text-xl" style="color:var(--gold)"></i>
           <h3 class="font-semibold">X（旧Twitter）</h3>
         </div>
         <p class="text-sm text-gray-300">DMまたはメンションからお問い合わせください。</p>
@@ -287,7 +292,7 @@
       </div>
       <div class="card flex flex-col gap-2">
         <div class="flex items-center gap-2">
-          <i class="fas fa-youtube text-xl" style="color:var(--gold)"></i>
+          <i class="fab fa-youtube text-xl" style="color:var(--gold)"></i>
           <h3 class="font-semibold">YouTube</h3>
         </div>
         <p class="text-sm text-gray-300">チャンネルの概要欄からご連絡いただけます。</p>
