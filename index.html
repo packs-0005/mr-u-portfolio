@@ -123,7 +123,6 @@ header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filte
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">ホーム</a>
                     <a href="#about" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">プロフィール</a>
-                    <a href="#archviz" class="nav-link mr-4">建築ビジュアライズ</a>
         <a href="#portfolio" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">作品集</a>
                     <a href="#contact" class="nav-link text-gray-700 hover:text-gold font-medium transition-colors">お問い合わせ</a>
                 </div>
@@ -152,7 +151,7 @@ header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filte
         <div class="container mx-auto px-6 text-center relative z-10">
             <div class="animate-fade-in">
                 <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight"><span class="block">Mr.U</span><span class="block hero-gold">Portfolio</span></h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。<br><span class="text-base opacity-90">主な使用ソフト：Blender / ZBrush / Rhinoceros / After Effects / Premiere Pro / FL Studio / Photoshop / Illustrator / Substance 3D Painter / Cascadeur</span></p>
+                <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#portfolio" class="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all transform hover:scale-105">
                         <i class="fas fa-images mr-2"></i>作品を見る
@@ -291,59 +290,6 @@ header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filte
     </section>
 
     <!-- Portfolio Section -->
-    
-<!-- ===== ArchViz Section (explicit) ===== -->
-<section id="archviz" class="section-dark py-16">
-  <div class="max-w-6xl mx-auto px-6">
-    <h2 class="text-3xl md:text-4xl font-bold mb-4">建築ビジュアライズ</h2>
-    <p class="text-gray-300 mb-8">
-      住宅・商業施設・インテリアの可視化。リアルタイム検討から最終レンダー、
-      カメラワークを用いたウォークスルーまで対応します。
-    </p>
-
-    <div class="grid md:grid-cols-3 gap-6 mb-10">
-      <div class="card-dark p-5 rounded-xl">
-        <div class="flex items-center mb-3 space-x-3">
-          <i class="fas fa-city text-gold text-xl"></i>
-          <h3 class="text-lg font-semibold">外観レンダリング</h3>
-        </div>
-        <p class="text-gray-300 text-sm">昼夜・季節差分／ランドスケープ／マス模型からの提案。</p>
-      </div>
-      <div class="card-dark p-5 rounded-xl">
-        <div class="flex items-center mb-3 space-x-3">
-          <i class="fas fa-couch text-gold text-xl"></i>
-          <h3 class="text-lg font-semibold">内観・マテリアル</h3>
-        </div>
-        <p class="text-gray-300 text-sm">質感設定／照明演出／カラースキーム検討。</p>
-      </div>
-      <div class="card-dark p-5 rounded-xl">
-        <div class="flex items-center mb-3 space-x-3">
-          <i class="fas fa-video text-gold text-xl"></i>
-          <h3 class="text-lg font-semibold">アニメーション</h3>
-        </div>
-        <p class="text-gray-300 text-sm">ウォークスルー／ターンテーブル／演出編集。</p>
-      </div>
-    </div>
-
-    <!-- Embed placeholder: YouTube URLをいただいたら差し替えます -->
-    <div class="relative w-full rounded-xl overflow-hidden border border-gold" style="max-width: 960px; margin: 0 auto;">
-      <div class="relative" style="padding-top:56.25%;">
-        <iframe
-          class="absolute inset-0 w-full h-full"
-          src="about:blank"
-          title="ArchViz Reel (準備中)"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="autoplay; encrypted-media; picture-in-picture; fullscreen">
-        </iframe>
-      </div>
-    </div>
-
-    <div class="text-center mt-8">
-      <a href="#contact" class="inline-block btn-ghost px-5 py-3 rounded-lg">依頼・相談はこちら</a>
-    </div>
-  </div>
-</section>
 
 <section id="portfolio" class="section-dark" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
@@ -414,7 +360,18 @@ header, nav, .site-header{background:rgba(11,11,12,.86)!important;backdrop-filte
     <div class="card-dark p-5 rounded-xl flex items-center space-x-4">
       <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.35)">
         <i class="fas fa-building text-gold text-xl"></i>
-      </div>
+      
+      <!-- ArchViz as a portfolio card -->
+      <article class="card-dark rounded-xl overflow-hidden border border-gold">
+        <div class="aspect-video bg-black/40 flex items-center justify-center">
+          <i class="fas fa-building text-gold text-3xl"></i>
+        </div>
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">建築ビジュアライズ</h3>
+          <p class="text-gray-300 text-sm mt-1">外観/内観レンダリング、ウォークスルー等</p>
+        </div>
+      </article>
+    </div>
       <div>
         <h3 class="text-lg font-semibold mb-1">建築ビジュアライズ</h3>
         <p class="text-gray-300 text-sm">内外観レンダリング / ウォークスルー / マテリアル提案</p>
