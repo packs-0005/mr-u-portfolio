@@ -103,9 +103,12 @@
     <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Mr.U<br><span class="text-gold">Portfolio</span></h1>
     <p class="max-w-2xl text-center mb-6 leading-relaxed">3DCGから音楽まで、設計〜演出を一気通貫で手掛けるマルチクリエイター。</p>
     <div class="flex justify-center gap-6 mb-4 text-3xl">
-      <!-- Social icons: show X (Twitter) and YouTube.  Using fa-twitter for wider browser compatibility -->
-      <a href="https://x.com/nlimited_u_?s=21" target="_blank" class="hover:text-gold">
-        <i class="fab fa-twitter"></i>
+      <!-- Social icons: custom X icon and Font Awesome YouTube icon.  The X icon is an inline SVG to ensure the new logo renders correctly. -->
+      <a href="https://x.com/nlimited_u_?s=21" target="_blank" class="hover:text-gold flex items-center justify-center">
+        <!-- Bootstrap Twitter X icon SVG (viewBox 0 0 16 16), scaled to match FontAwesome icons -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor">
+          <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+        </svg>
       </a>
       <a href="https://www.youtube.com/channel/UCNrCRROAlxK6L1vxkko98vg" target="_blank" class="hover:text-gold">
         <i class="fab fa-youtube"></i>
@@ -279,20 +282,18 @@
         </div>
         <a href="https://youtu.be/WW-GrN05sFQ" target="_blank" class="text-gold text-sm mt-2 underline">YouTubeで見る</a>
       </div>
-      <!-- Second video card: FiNGAiSM character art exhibition video -->
+      <!-- Second video card -->
       <div class="portfolio-card card">
-        <iframe src="https://www.youtube-nocookie.com/embed/Wwu94OvYLG8" title="FiNGAiSM キャラクターアート展 (10分 / フル3DCG)" loading="lazy" allowfullscreen></iframe>
+        <iframe src="https://www.youtube-nocookie.com/embed/Wwu94OvYLG8" title="FiNGAiSM – キャラクターアート展 映像コンテンツ" loading="lazy" allowfullscreen></iframe>
         <h3 class="text-lg font-semibold">FiNGAiSM – キャラクターアート展 映像コンテンツ（10分 / フル3DCG）</h3>
-        <p class="text-sm text-gray-300">Kis-My-Ft2の千賀健永氏が手掛けるキャラクターアート展「FiNGAiSM」の映像コンテンツとして制作した、10分間のフル3DCGアニメーション。渡されたテキストベースのストーリーから一人で映像化し、映像の全てを手掛けました（制作期間4か月）。</p>
+        <p class="text-sm text-gray-300">Kis-My-Ft2の千賀健永氏が手掛けるキャラクターアート展「FiNGAiSM」の映像コンテンツ。テキストベースのストーリーをもとに、映像の全てを一人で制作。制作期間は4か月で、SEやBGMは外部制作。</p>
         <div class="flex flex-wrap gap-2 mt-2">
           <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Blender</span>
-          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Substance 3D Painter</span>
           <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">After Effects</span>
           <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Premiere Pro</span>
         </div>
         <a href="https://youtu.be/Wwu94OvYLG8" target="_blank" class="text-gold text-sm mt-2 underline">YouTubeで見る</a>
       </div>
-      <!-- Additional works can be added here -->
     </div>
   </section>
 
@@ -303,7 +304,10 @@
     <div class="grid sm:grid-cols-2 gap-6">
       <div class="card flex flex-col gap-2">
         <div class="flex items-center gap-2">
-          <i class="fab fa-x-twitter text-xl" style="color:var(--gold)"></i>
+          <!-- Custom X icon using inline SVG to reflect the current logo -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="1.25em" height="1.25em" fill="var(--gold)">
+            <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+          </svg>
           <h3 class="font-semibold">X（旧Twitter）</h3>
         </div>
         <p class="text-sm text-gray-300">DMまたはメンションからお問い合わせください。</p>
@@ -311,6 +315,7 @@
       </div>
       <div class="card flex flex-col gap-2">
         <div class="flex items-center gap-2">
+          <!-- YouTube icon (FontAwesome) -->
           <i class="fab fa-youtube text-xl" style="color:var(--gold)"></i>
           <h3 class="font-semibold">YouTube</h3>
         </div>
