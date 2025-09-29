@@ -291,6 +291,25 @@
         </div>
         <a href="https://youtu.be/mYr_AgQByaE" target="_blank" class="text-gold text-sm mt-2 underline">YouTubeで見る</a>
       </div>
+
+      <!-- Fifth portfolio card: Jewelry accessories -->
+      <div class="portfolio-card card">
+        <h3 class="text-lg font-semibold">OBLIVIO – アクセサリー作品</h3>
+        <p class="text-sm text-gray-300">複雑で、コンセプチュアルなデザインが特徴。アイテム一つ一つに明確なコンセプトと、ストーリーを織り込んだ作品群を一部掲載。</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
+          <img src="assets/accessories/ring_gold.jpg" alt="アクセサリー1" class="rounded-lg w-full accessory-thumb cursor-pointer" data-full="assets/accessories/ring_gold.jpg">
+          <img src="assets/accessories/ring_rock1.jpg" alt="アクセサリー2" class="rounded-lg w-full accessory-thumb cursor-pointer" data-full="assets/accessories/ring_rock1.jpg">
+          <img src="assets/accessories/pendant_close.jpg" alt="アクセサリー3" class="rounded-lg w-full accessory-thumb cursor-pointer" data-full="assets/accessories/pendant_close.jpg">
+          <img src="assets/accessories/pendant_collage.jpg" alt="アクセサリー4" class="rounded-lg w-full accessory-thumb cursor-pointer" data-full="assets/accessories/pendant_collage.jpg">
+          <img src="assets/accessories/ring_intricate_collage.jpg" alt="アクセサリー5" class="rounded-lg w-full accessory-thumb cursor-pointer" data-full="assets/accessories/ring_intricate_collage.jpg">
+          <img src="assets/accessories/hand_accessories.jpg" alt="アクセサリー6" class="rounded-lg w-full accessory-thumb cursor-pointer" data-full="assets/accessories/hand_accessories.jpg">
+        </div>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Blender</span>
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Rhinoceros</span>
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">ZBrush</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -335,7 +354,7 @@
   </div>
   <script>
     // Modal functionality for figure thumbnails
-    document.querySelectorAll(".figure-thumb").forEach(img => {
+    document.querySelectorAll(".figure-thumb, .accessory-thumb").forEach(img => {
       img.addEventListener("click", () => {
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImg");
