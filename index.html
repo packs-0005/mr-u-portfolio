@@ -310,6 +310,22 @@
           <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">ZBrush</span>
         </div>
       </div>
+
+      <!-- Sixth portfolio card: Luxury study & toilet visualization -->
+      <div class="portfolio-card card">
+        <h3 class="text-lg font-semibold">ラグジュアリー書斎・トイレ ビジュアライズ</h3>
+        <p class="text-sm text-gray-300">ones of truthが展開するラグジュアリーな書斎とトイレ空間を3DCGでビジュアライズ。BlenderとSubstance 3D Painterを用い、質感やライティングにこだわり、心地よい空間の雰囲気を再現しました。</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
+          <img src="assets/interiors/bath_dark.png" alt="ラグジュアリー トイレ 1" class="rounded-lg w-full visual-thumb cursor-pointer" data-full="assets/interiors/bath_dark.png">
+          <img src="assets/interiors/bath_gold.png" alt="ラグジュアリー トイレ 2" class="rounded-lg w-full visual-thumb cursor-pointer" data-full="assets/interiors/bath_gold.png">
+          <img src="assets/interiors/study_color.png" alt="ラグジュアリー 書斎 1" class="rounded-lg w-full visual-thumb cursor-pointer" data-full="assets/interiors/study_color.png">
+          <img src="assets/interiors/study_modern.png" alt="ラグジュアリー 書斎 2" class="rounded-lg w-full visual-thumb cursor-pointer" data-full="assets/interiors/study_modern.png">
+        </div>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Blender</span>
+          <span class="border border-gold text-gold px-3 py-1 rounded-full text-xs">Substance 3D Painter</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -354,7 +370,7 @@
   </div>
   <script>
     // Modal functionality for figure thumbnails
-    document.querySelectorAll(".figure-thumb, .accessory-thumb").forEach(img => {
+    document.querySelectorAll(".figure-thumb, .accessory-thumb, .visual-thumb").forEach(img => {
       img.addEventListener("click", () => {
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("modalImg");
