@@ -235,7 +235,7 @@
     <h2 class="section-title">作品集</h2>
     <!-- Category filter tabs -->
     <div class="flex flex-wrap gap-3 mb-6">
-      <button class="filter-btn border border-gold px-3 py-1 rounded-full text-sm bg-gold text-black" data-filter="all">All</button>
+      <button class="filter-btn border border-gold px-3 py-1 rounded-full text-sm bg-gold text-white" data-filter="all">All</button>
       <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="3dcg">3DCGアニメーション</button>
       <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="vfx">VFX</button>
       <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="figure">フィギュア</button>
@@ -407,12 +407,12 @@
         });
         // Reset styles: all tabs become gold text on transparent background
         filterButtons.forEach(b => {
-          b.classList.remove('bg-gold', 'text-black');
+          b.classList.remove('bg-gold', 'text-black', 'text-white');
           b.classList.add('text-gold');
         });
-        // Activate the selected tab: gold background with black text
+        // Activate the selected tab: gold background with white text
         btn.classList.remove('text-gold');
-        btn.classList.add('bg-gold', 'text-black');
+        btn.classList.add('bg-gold', 'text-white');
       });
     });
   </script>
