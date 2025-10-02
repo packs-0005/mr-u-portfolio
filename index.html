@@ -233,9 +233,18 @@
   <!-- Portfolio Section -->
   <section id="portfolio" class="max-w-5xl mx-auto px-6 py-12 mt-12">
     <h2 class="section-title">作品集</h2>
+    <!-- Category filter tabs -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm bg-gold text-black" data-filter="all">All</button>
+      <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="3dcg">3DCGアニメーション</button>
+      <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="vfx">VFX</button>
+      <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="figure">フィギュア</button>
+      <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="jewelry">ジュエリー</button>
+      <button class="filter-btn border border-gold text-gold px-3 py-1 rounded-full text-sm" data-filter="archviz">建築ビジュアライズ</button>
+    </div>
     <div class="grid gap-6">
       <!-- First video card -->
-      <div class="portfolio-card card">
+      <div class="portfolio-card card" data-category="3dcg">
         <iframe src="https://www.youtube-nocookie.com/embed/WW-GrN05sFQ" title="ones of truth – PR Video" loading="lazy" allowfullscreen></iframe>
         <h3 class="text-lg font-semibold">ones of truth – プロダクトPR（1分 / フル3DCG）</h3>
         <p class="text-sm text-gray-300">コンセプト設計から3Dモデル制作、アニメーション、楽曲制作（歌唱収録含む）、編集までを一人で完遂。製品の質感と機能性を「音と動き」で訴求する、演出重視のモーショングラフィックス作品。</p>
@@ -249,7 +258,7 @@
         <a href="https://youtu.be/WW-GrN05sFQ" target="_blank" class="text-gold text-sm mt-2 underline">YouTubeで見る</a>
       </div>
       <!-- Second video card -->
-      <div class="portfolio-card card">
+      <div class="portfolio-card card" data-category="3dcg">
         <iframe src="https://www.youtube-nocookie.com/embed/Wwu94OvYLG8" title="FiNGAiSM – キャラクターアート展 映像コンテンツ" loading="lazy" allowfullscreen></iframe>
         <h3 class="text-lg font-semibold">FiNGAiSM – キャラクターアート展 映像コンテンツ（10分 / フル3DCG）</h3>
         <p class="text-sm text-gray-300">Kis-My-Ft2の千賀健永氏が手掛けるキャラクターアート展「FiNGAiSM」の映像コンテンツ。テキストベースのストーリーをもとに、映像の全てを一人で制作。制作期間は4か月で、SEやBGMは外部制作。</p>
@@ -261,7 +270,7 @@
         <a href="https://youtu.be/Wwu94OvYLG8" target="_blank" class="text-gold text-sm mt-2 underline">YouTubeで見る</a>
       </div>
       <!-- Third portfolio card: FiNGAiSM figure prototypes and exhibit -->
-      <div class="portfolio-card card">
+      <div class="portfolio-card card" data-category="figure">
         <h3 class="text-lg font-semibold">FiNGAiSM – フィギュア原型 & 展示モデル</h3>
         <p class="text-sm text-gray-300">FiNGAiSM展のために制作したフィギュア原型と展示作品。ZBrushで造形し、Rhinocerosで寸法精度を詰め、Blenderで3Dプリント用データを整備。</p>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
@@ -280,7 +289,7 @@
         </div>
       </div>
       <!-- Fourth video card: VFX sample -->
-      <div class="portfolio-card card">
+      <div class="portfolio-card card" data-category="vfx">
         <iframe src="https://www.youtube-nocookie.com/embed/mYr_AgQByaE" title="VFXサンプル映像 – ドローン空撮合成" loading="lazy" allowfullscreen></iframe>
         <h3 class="text-lg font-semibold">VFXサンプル映像 – ドローン空撮合成</h3>
         <p class="text-sm text-gray-300">ドローンによる空撮映像に3DCGアニメーションを合成し、ボイスとSEを追加した短いVFXサンプルです。</p>
@@ -293,7 +302,7 @@
       </div>
 
       <!-- Fifth portfolio card: Jewelry accessories -->
-      <div class="portfolio-card card">
+      <div class="portfolio-card card" data-category="jewelry">
         <h3 class="text-lg font-semibold">OBLIVIO – アクセサリー作品</h3>
         <p class="text-sm text-gray-300">複雑で、コンセプチュアルなデザインが特徴。アイテム一つ一つに明確なコンセプトと、ストーリーを織り込んだ作品群を一部掲載。</p>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
@@ -312,7 +321,7 @@
       </div>
 
       <!-- Sixth portfolio card: Luxury study & toilet visualization -->
-      <div class="portfolio-card card">
+      <div class="portfolio-card card" data-category="archviz">
         <h3 class="text-lg font-semibold">ラグジュアリー書斎・トイレ ビジュアライズ</h3>
         <p class="text-sm text-gray-300">ones of truthが展開するラグジュアリーな書斎とトイレ空間を3DCGでビジュアライズ。BlenderとSubstance 3D Painterを用い、質感やライティングにこだわり、心地よい空間の雰囲気を再現しました。</p>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2">
@@ -380,6 +389,26 @@
     });
     document.getElementById("closeModal").addEventListener("click", () => {
       document.getElementById("imageModal").classList.add("hidden");
+    });
+
+    // Category filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        // Show/hide cards based on category
+        document.querySelectorAll('.portfolio-card').forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'all' || filter === cat) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        // Update active styling on tabs
+        filterButtons.forEach(b => b.classList.remove('bg-gold','text-black'));
+        btn.classList.add('bg-gold','text-black');
+      });
     });
   </script>
 </body>
